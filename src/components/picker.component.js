@@ -8,7 +8,7 @@ const DropDownPicker = (props) => {
     console.log("selected value  " + props.title)
 
     let serviceItems = listData.map((s, i) => {
-        return <Picker.Item key={i} value={s} label={s} />
+        return <Picker.Item key={i} value={s} label={s} style={{ fontSize: 14 }} />
     });
 
     return (
@@ -24,9 +24,9 @@ const DropDownPicker = (props) => {
 
 const styles = StyleSheet.create({
     layout: {
-        marginTop:16,
-        borderRadius: 10,
-        shadowRadius: 5,borderColor:"#EEEEEE",borderWidth:1,backgroundColor:Constants.Colors.WHITE,
+        marginTop: 16,
+        borderRadius: 50,
+        shadowRadius: 5, borderColor: "#EEEEEE", borderWidth: 1, backgroundColor: Constants.Colors.WHITE,
         shadowColor: '#000',
         shadowOpacity: 0.1,
         elevation: 1,

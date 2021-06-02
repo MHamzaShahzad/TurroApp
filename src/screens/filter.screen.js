@@ -4,12 +4,13 @@ import Constants from '../utils/constants';
 import SearchPicker from '../components/picker.component';
 import SearchButton from '../components/cards/simple.card.component';
 import SimpleCard from '../components/cards/simple.card.component';
+import RNPickerSelect from 'react-native-picker-select';
 
 export default function FilterSawari({ props, navigation }) {
     let services = ['Choose Option', 'one', 'two', 'three', 'four', 'five']
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: Constants.Colors.WHITE }}>
             <View style={style.container}>
                 <Text style={style.textStyleHeading}>Car Make</Text>
                 <SearchPicker data={services} title={"Please select your car make"}></SearchPicker>
@@ -26,14 +27,28 @@ export default function FilterSawari({ props, navigation }) {
                     <SimpleCard style={{ width: 180, height: 50, flexDirection: "row", backgroundColor: Constants.Colors.WHITE, text: { color: Constants.Colors.PRIMARY } }}
                         title={"Advanced Search"} image={"plus"} size={24} icon_color={Constants.Colors.PRIMARY}></SimpleCard>
                 </View>
+                <RNPickerSelect
+                    onValueChange={(value) => console.log(value)}
+                    items={[
+                        { label: 'Football', value: 'football' },
+                        { label: 'Baseball', value: 'baseball' },
+                        { label: 'Hockey', value: 'hockey' },
+                    ]}
+                />
             </View>
         </SafeAreaView>
     );
 }
 const style = StyleSheet.create({
     container: {
-        flex: 1,
-        paddingStart: 16, paddingEnd: 16,
+        borderRadius: 10, elevation: 3,
+        margin: 16,
+        padding: 16,
+        shadowColor: '#000',
+        shadowOpacity: 0.3,
+        elevation: 6,
+        shadowRadius: 5,
+        shadowOffset: { width: 1, height: 5 },
         backgroundColor: Constants.Colors.WHITE
     },
     textStyleHeading: {
