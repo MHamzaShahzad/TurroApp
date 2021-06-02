@@ -8,8 +8,6 @@ const SimpleCard = (props) => {
         <TouchableOpacity style={[styles.button, props.style]} onPress={props.customClick}>
             {props.image ? <MaterialCommunityIcons name={props.image} size={props.size} color={props.icon_color} /> : <></>}
             <Text style={[styles.text, props.style.text]}>{props.title}</Text>
-            {props.image ? <MaterialCommunityIcons name={props.image} size={26} /> : <></>}
-            <Text style={styles.text}>{props.title}</Text>
         </TouchableOpacity>
     );
 };
