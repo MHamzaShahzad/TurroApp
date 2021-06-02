@@ -1,8 +1,8 @@
 import React from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, Image, StatusBar, ScrollView, TouchableOpacity } from 'react-native';
 
-import car from '../assets/car.png';
-import arrow from '../assets/arrow.png';
+import car from '../assets/app_icon.png';
+import arrow from '../assets/login.png';
 
 
 const DATA = [
@@ -38,19 +38,19 @@ const Item = ({ title }) => (
     </View>
 );
 
-export default function DataList() {
+export default function ChooseItem() {
     const renderItem = ({ item }) => <Item title={item.title} />;
 
     return (
         <View style={styles.container}>
-            <View style={styles.gariview}>
+            <View style={styles.titleView}>
                 <Image source={car} style={styles.carimg} />
-                <Text style={styles.garitext}>GET GAARI</Text>
+                <Text style={styles.garitext}>GET SAWARI</Text>
             </View>
-            <Text style={styles.selectcity}>Select City</Text>
-            <FlatList numColumns={2} data={DATA} renderItem={renderItem} keyExtractor={item => item.id} />
-            <View style={styles.arrowview}>
-                <Image source={arrow} style={styles.arrowimg} />
+            <Text style={styles.selectCity}>Select City</Text>
+            <FlatList numColumns={2} data={DATA} renderItem={renderItem} keyExtractor={(item, index) => index} />
+            <View style={styles.gridView}>
+                <Image source={arrow} style={styles.arrowImage} />
             </View>
         </View>
     );
@@ -59,7 +59,6 @@ export default function DataList() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: StatusBar.currentHeight || 0,
     },
     item: {
         borderColor: '#D3D3D3',
@@ -76,7 +75,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         paddingTop: 4,
     },
-    gariview: {
+    titleView: {
         flexDirection: "row",
         paddingTop: 35,
         paddingLeft: 30
@@ -93,12 +92,12 @@ const styles = StyleSheet.create({
         color: "#fa9b17",
         letterSpacing: 1
     },
-    selectcity: {
+    selectCity: {
         paddingLeft: 30,
         fontSize: 24,
         paddingBottom: 10
     },
-    arrowview: {
+    gridView: {
         borderWidth: 1,
         width: "15%",
         height: 60,
@@ -107,7 +106,7 @@ const styles = StyleSheet.create({
         borderRadius: 40,
         backgroundColor: "#fa9b17"
     },
-    arrowimg: {
+    arrowImage: {
         width: "60%",
         height: 50,
         alignSelf: "center",

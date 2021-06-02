@@ -11,6 +11,7 @@ import NumberLoginScreen from './number_login.screen'
 import RegisterScreen from './register.screen'
 import OTPScreen from './otp.screen'
 import ProfileScreen from './profile.screen'
+import ChooseItem from './choose.screen'
 
 export default {
     AuthScreen,
@@ -25,5 +26,6 @@ export default {
     NumberLoginScreen,
     RegisterScreen,
     OTPScreen,
-    ProfileScreen
+    ProfileScreen,
+    ChooseItem
 }
