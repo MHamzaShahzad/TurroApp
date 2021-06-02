@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Image } from 'react-native';
 import Constants from '../utils/constants'
-import { Picker } from '@react-native-picker/picker';
+import RNPickerSelect from 'react-native-picker-select';
+
 const DropDownPicker = (props) => {
     const [listData, setListData] = React.useState(props.data)
-    console.log("list data " + listData)
-    console.log("selected value  " + props.title)
+    const [selectedValue, setSValue] = React.useState('')
 
-    let serviceItems = listData.map((s, i) => {
-        return <Picker.Item key={i} value={s} label={s} style={{ fontSize: 14 }} />
-    });
-
+    const noop = (value) => {
+        console.log(value)
+        setSValue(value)
+    };
     return (
         <View style={styles.layout} >
-            <Picker
-                selectedValue={props.title} mode='dropdown'
-                useNativeAndroidPickerStyle={false} >
-                {serviceItems}
-            </Picker>
+            <RNPickerSelect
+                style={{ inputAndroid: { color: 'black' } }}
+                placeholder={props.title}
+                onValueChange={noop}
+                value={selectedValue}
+                items={listData}
+            />
         </View>
     );
 };

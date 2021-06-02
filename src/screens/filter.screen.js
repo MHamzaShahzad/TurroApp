@@ -2,24 +2,29 @@ import React from 'react';
 import { SafeAreaView, View, StyleSheet, Text } from 'react-native';
 import Constants from '../utils/constants';
 import SearchPicker from '../components/picker.component';
-import SearchButton from '../components/cards/simple.card.component';
 import SimpleCard from '../components/cards/simple.card.component';
-import RNPickerSelect from 'react-native-picker-select';
 
 export default function FilterSawari({ props, navigation }) {
-    let services = ['Choose Option', 'one', 'two', 'three', 'four', 'five']
-
+    let services = [
+        { label: 'Football', value: 'football' },
+        { label: 'Baseball', value: 'baseball' },
+        { label: 'Hockey', value: 'hockey' },
+    ]
+    const placeholder1 = {
+        label: 'Please select your car make',
+        value: null,
+    };
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Constants.Colors.WHITE }}>
             <View style={style.container}>
                 <Text style={style.textStyleHeading}>Car Make</Text>
-                <SearchPicker data={services} title={"Please select your car make"}></SearchPicker>
+                <SearchPicker data={services} title={placeholder1}></SearchPicker>
                 <Text style={style.textStyleHeading}>Car Model</Text>
-                <SearchPicker data={services} title={"Please select your car model"}></SearchPicker>
+                <SearchPicker data={services} title={placeholder1}></SearchPicker>
                 <Text style={style.textStyleHeading}>City</Text>
-                <SearchPicker data={services} title={"Please select your city"}></SearchPicker>
+                <SearchPicker data={services} title={placeholder1}></SearchPicker>
                 <Text style={style.textStyleHeading}>Rent</Text>
-                <SearchPicker data={services} title={"Select your rent rate in Rupees"}></SearchPicker>
+                <SearchPicker data={services} title={placeholder1}></SearchPicker>
                 <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 16 }}>
                     <SimpleCard style={{ width: 120, height: 50 }} title={"Search"}></SimpleCard>
                 </View>
@@ -27,14 +32,7 @@ export default function FilterSawari({ props, navigation }) {
                     <SimpleCard style={{ width: 180, height: 50, flexDirection: "row", backgroundColor: Constants.Colors.WHITE, text: { color: Constants.Colors.PRIMARY } }}
                         title={"Advanced Search"} image={"plus"} size={24} icon_color={Constants.Colors.PRIMARY}></SimpleCard>
                 </View>
-                <RNPickerSelect
-                    onValueChange={(value) => console.log(value)}
-                    items={[
-                        { label: 'Football', value: 'football' },
-                        { label: 'Baseball', value: 'baseball' },
-                        { label: 'Hockey', value: 'hockey' },
-                    ]}
-                />
+
             </View>
         </SafeAreaView>
     );
