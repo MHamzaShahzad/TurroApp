@@ -75,11 +75,11 @@ export default function DescriptionScreen({ props, navigation }) {
                             </View>
                         </View>
                         <View style={style.outerTextViewNoBg}>
-                            <SimpleCard title="5" image='car' />
-                            <SimpleCard title="Petrol" image='car' />
-                            <SimpleCard title="Sedan" image='car' />
-                            <SimpleCard title="Local" image='car' />
-                            <SimpleCard title="Exp" image='car' />
+                            <SimpleCard title="5" image='car' icon_color={Constants.Colors.WHITE} />
+                            <SimpleCard title="Petrol" image='car' icon_color={Constants.Colors.WHITE} />
+                            <SimpleCard title="Sedan" image='car' icon_color={Constants.Colors.WHITE} />
+                            <SimpleCard title="Local" image='car' icon_color={Constants.Colors.WHITE} />
+                            <SimpleCard title="Exp" image='car' icon_color={Constants.Colors.WHITE} />
                         </View>
                         <View style={style.outerTextView}>
                             <View style={style.innerTextView}>
