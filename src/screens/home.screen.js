@@ -49,15 +49,18 @@ export default function HomeScreen({ props, navigation }) {
     const viewAll = (category) => {
         navigation.navigate('SawariListScreen')
     }
+    const applyFilter = (category) => {
+        navigation.navigate('FilterSawariScreen')
+    }
 
     return (
         <>
             <Header />
-            <StatusBar barStyle="light-content" backgroundColor={Constants.Colors.PRIMARY}/>
+            <StatusBar barStyle="light-content" backgroundColor={Constants.Colors.PRIMARY} />
             <SafeAreaView style={{ flex: 1, padding: 10 }}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={styles.GridViewBlockStyle}>
-                        <SimpleCard style={{ height: 50, width: "100%" }} title="Search" />
+                        <SimpleCard style={{ height: 50, width: "100%" }} title="Search" customClick={() => applyFilter("search filter")} />
                     </View>
                     {/* <FlatList
                         data={sawarCategories}

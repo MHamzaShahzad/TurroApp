@@ -5,9 +5,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 const SimpleCard = (props) => {
     return (
-        <TouchableOpacity style={[styles.button, { width: props.style?.width, height: props.style?.height }]} onPress={props.customClick}>
-            {props.image ? <MaterialCommunityIcons name={props.image} size={26} /> : <></>}
-            <Text style={styles.text}>{props.title}</Text>
+        <TouchableOpacity style={[styles.button, props.style]} onPress={props.customClick}>
+            {props.image ? <MaterialCommunityIcons name={props.image} size={props.size} color={props.icon_color} /> : <></>}
+            <Text style={[styles.text, props.style.text]}>{props.title}</Text>
         </TouchableOpacity>
     );
 };
