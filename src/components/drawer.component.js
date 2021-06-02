@@ -24,7 +24,7 @@ export default function DrawerContent({ props, navigation }) {
 
       <View style={styles.navItemContainer}>
         <Image source={login} style={styles.navItemIconStyle} resizeMode='contain' />
-        <TouchableOpacity onPress={() => drawerNavigationItemClick('AuthScreen')}>
+        <TouchableOpacity onPress={() => drawerNavigationItemClick('ProfileScreen')}>
           <Text style={styles.navItemTextStyle}>Login or Sign Up</Text>
         </TouchableOpacity>
       </View>
