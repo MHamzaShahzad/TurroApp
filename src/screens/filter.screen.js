@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaView, View, StyleSheet, Text } from 'react-native';
 import Constants from '../utils/constants';
-import SearchPicker from '../components/picker.component';
+import DropDownPicker from '../components/picker.component';
 import SimpleCard from '../components/cards/simple.card.component';
 
 export default function FilterSawari({ props, navigation }) {
@@ -10,21 +10,34 @@ export default function FilterSawari({ props, navigation }) {
         { label: 'Baseball', value: 'baseball' },
         { label: 'Hockey', value: 'hockey' },
     ]
+    ///*** Drop Down Picker Place Holders */
     const placeholder1 = {
         label: 'Please select your car make',
+        value: null,
+    };
+    const placeholder2 = {
+        label: 'Please select your car model',
+        value: null,
+    };
+    const placeholder3 = {
+        label: 'Please select your city',
+        value: null,
+    };
+    const placeholder4 = {
+        label: 'Select your rent range in Rupees',
         value: null,
     };
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Constants.Colors.WHITE }}>
             <View style={style.container}>
                 <Text style={style.textStyleHeading}>Car Make</Text>
-                <SearchPicker data={services} title={placeholder1}></SearchPicker>
+                <DropDownPicker data={services} title={placeholder1}></DropDownPicker>
                 <Text style={style.textStyleHeading}>Car Model</Text>
-                <SearchPicker data={services} title={placeholder1}></SearchPicker>
+                <DropDownPicker data={services} title={placeholder2}></DropDownPicker>
                 <Text style={style.textStyleHeading}>City</Text>
-                <SearchPicker data={services} title={placeholder1}></SearchPicker>
+                <DropDownPicker data={services} title={placeholder3}></DropDownPicker>
                 <Text style={style.textStyleHeading}>Rent</Text>
-                <SearchPicker data={services} title={placeholder1}></SearchPicker>
+                <DropDownPicker data={services} title={placeholder4}></DropDownPicker>
                 <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 16 }}>
                     <SimpleCard style={{ width: 120, height: 50 }} title={"Search"}></SimpleCard>
                 </View>
