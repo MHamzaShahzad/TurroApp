@@ -4,7 +4,7 @@ import menu from '../assets/menu.png';
 import { useNavigation } from '@react-navigation/native';
 import Constants from '../utils/constants'
 
-export default function Header() {
+export default function Header(props) {
     const navigation = useNavigation();
 
     const openMenu = () => {
@@ -22,7 +22,7 @@ export default function Header() {
                 <Text style={styles.headerText}>Get Sawari</Text>
             </View>
             <View style={styles.menu}>
-                
+                {props.headerComponent}
             </View>
         </View>
     );

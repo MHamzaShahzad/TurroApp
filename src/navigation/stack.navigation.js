@@ -18,6 +18,7 @@ function MainStackNavigator() {
                 <Stack.Screen name="NumberLoginScreen" component={Screens.NumberLoginScreen} options={{ title: "Sawari Login" }} />
                 <Stack.Screen name="RegisterScreen" component={Screens.RegisterScreen} options={{ title: "Sawari Login" }} />
                 <Stack.Screen name="OTPScreen" component={Screens.OTPScreen} options={{ title: "Sawari OTP" }} />
+                <Stack.Screen name="AddSawariScreen" component={Screens.SawariAddScreen} options={{ title: "Add Sawari" }} />
             </Stack.Navigator>
         </NavigationContainer>
     );
