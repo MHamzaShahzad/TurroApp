@@ -26,12 +26,12 @@ export default function HomeTabNavigation() {
                     ),
                 }} />
 
-            <Tab.Screen name="Account" component={Screens.HomeScreen}
+            {/* <Tab.Screen name="Account" component={Screens.HomeScreen}
                 options={{
                     headerShown: false, tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons name="account-circle" color={color} size={26} />
                     ),
-                }} />
+                }} /> */}
 
         </Tab.Navigator>
     );

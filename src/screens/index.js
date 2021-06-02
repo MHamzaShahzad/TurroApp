@@ -10,6 +10,7 @@ import EmailLoginScreen from './email_login.screen'
 import NumberLoginScreen from './number_login.screen'
 import RegisterScreen from './register.screen'
 import OTPScreen from './otp.screen'
+import ProfileScreen from './profile.screen'
 
 export default {
     AuthScreen,
@@ -23,5 +24,6 @@ export default {
     EmailLoginScreen,
     NumberLoginScreen,
     RegisterScreen,
-    OTPScreen
+    OTPScreen,
+    ProfileScreen
 }
