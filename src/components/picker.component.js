@@ -26,12 +26,18 @@ const DropDownPicker = (props) => {
 
 const styles = StyleSheet.create({
     layout: {
+        padding: 10,
+        height: 45,
         marginTop: 16,
         borderRadius: 50,
-        shadowRadius: 5, borderColor: "#EEEEEE", borderWidth: 1, backgroundColor: Constants.Colors.WHITE,
+        shadowRadius: 5, 
+        borderColor: "#EEEEEE", 
+        borderWidth: 1, 
+        backgroundColor: Constants.Colors.WHITE,
         shadowColor: '#000',
         shadowOpacity: 0.1,
         elevation: 1,
+        justifyContent: 'center'
     }
 });
 
