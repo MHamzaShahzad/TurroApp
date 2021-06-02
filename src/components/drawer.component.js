@@ -31,7 +31,7 @@ export default function DrawerContent({ props, navigation }) {
 
       <View style={styles.navItemContainer}>
         <Image source={globe} style={styles.navItemIconStyle} resizeMode='contain' />
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => drawerNavigationItemClick('ChooseItem')}>
           <Text style={styles.navItemTextStyle}>Visit Website</Text>
         </TouchableOpacity>
       </View>
@@ -55,10 +55,6 @@ export default function DrawerContent({ props, navigation }) {
         <TouchableOpacity>
           <Text style={styles.navItemTextStyle}>Call Us</Text>
         </TouchableOpacity>
-      </View>
-      <View style={styles.container5}>
-        <View style={styles.preferencecontainer}>
-        </View>
       </View>
     </View>
   );
