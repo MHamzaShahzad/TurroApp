@@ -7,5 +7,22 @@ export default {
     },
     Fonts: {
         FAMILY: 'cochin'
+    },
+    NavigationItems: {
+        SawariHomeScreen: "SawariHome",
+        SawariDetailsScreen: "SawariDetails",
+        SawariListScreen: "SawariListScreen",
+        EmailLoginScreen: "EmailLoginScreen",
+        NumberLoginScreen: "NumberLoginScreen",
+        RegisterScreen: "RegisterScreen",
+        OTPScreen: "OTPScreen",
+        AddSawariScreen: "AddSawariScreen",
+        FilterSawariScreen: "FilterSawariScreen",
+        ProfileScreen: "ProfileScreen",
+        ChooseItemScreen: "ChooseItemScreen",
+        AdvanceFilterScreen: "AdvanceFilterScreen",
+        AuthScreen: "AuthScreen",
+        DrawerBottomTabs: "DrawerBottomTabs",
+        MySawariListScreen: "MySawariListScreen"
     }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, StatusBar, TextInput, ScrollView } from 'react-native';
 
 import app from '../assets/app_icon.png';
+import Constants from '../utils/constants';
 
 export default function NumberLoginScreen({ navigation }) {
     return (
@@ -16,7 +17,7 @@ export default function NumberLoginScreen({ navigation }) {
                     <TextInput placeholder="Enter Number" style={styles.nameinput} />
                 </View>
                 <View style={styles.signincontainer}>
-                    <Text style={styles.Signuptext} onPress={() => navigation.navigate("OTPScreen")} >Sign In</Text>
+                    <Text style={styles.Signuptext} onPress={() => navigation.navigate(Constants.NavigationItems.OTPScreen)} >Sign In</Text>
                     <View style={styles.alreadyaccountview}>
                         <Text style={styles.alreadyaccount}>Don't have an Account ? </Text>
                         <Text style={styles.Signinext}>Sign Up</Text>

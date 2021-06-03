@@ -2,10 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, StatusBar, TextInput, ScrollView } from 'react-native';
 
 import app from '../assets/app_icon.png';
+import Constants from '../utils/constants';
 
 export default function EmailLoginScreen({ navigation }) {
     return (
-
         <View style={styles.container}>
             <View style={styles.container1}>
                 <Image source={app} style={styles.appimg} />
@@ -23,11 +23,11 @@ export default function EmailLoginScreen({ navigation }) {
                 <Text style={{ margin: 20, fontSize: 18 }}>Forget Password?</Text>
                 <View style={styles.container4}>
 
-                    <Text style={styles.Signuptext} onPress={() => navigation.navigate("Number")} >Sign In</Text>
+                    <Text style={styles.Signuptext} >Sign In</Text>
 
                     <View style={styles.alreadyaccountview}>
                         <Text style={styles.alreadyaccount}>Don't have an Account ? </Text>
-                        <Text style={styles.Signinext}>Sign Up</Text>
+                        <Text style={styles.Signinext} onPress={() => navigation.navigate(Constants.NavigationItems.RegisterScreen)}>Sign Up</Text>
                     </View>
                 </View>
             </ScrollView>

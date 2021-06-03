@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, FlatList, Text, SafeAreaView, ScrollView } from 'react-native';
 
 import HomeCard from '../components/cards/home.card.component';
+import Constants from '../utils/constants';
 
 export default function ItemsScreen({ props, navigation }) {
     const [sawariList, setSawariList] = useState(
@@ -38,7 +39,7 @@ export default function ItemsScreen({ props, navigation }) {
                     data={sawariList}
                     renderItem={({ item }) =>
                         <View style={styles.GridViewBlockStyle}>
-                            <HomeCard style={{ height: 200, width: '100%' }} title="DATA" customClick={() => navigation.navigate('SawariDetails')} />
+                            <HomeCard style={{ height: 200, width: '100%' }} title="DATA" customClick={() => navigation.navigate(Constants.NavigationItems.SawariDetailsScreen)} />
                         </View>
                     }
                     numColumns={2}

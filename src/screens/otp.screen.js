@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, StatusBar, TextInput, ScrollView } from 'react-native';
 
 import { CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell, } from 'react-native-confirmation-code-field';
@@ -8,16 +8,14 @@ import app from '../assets/app_icon.png';
 export default function OTPScreen({ navigation }) {
     const CELL_COUNT = 6;
 
-
     const [value, setValue] = useState('');
     const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
     const [props, getCellOnLayoutHandler] = useClearByFocusCell({ value, setValue, });
 
     return (
-
         <View style={styles.container}>
             <View style={styles.container1}>
-                <Image source={app} style={styles.appimg} />
+                <Image source={app} style={styles.appImage} />
                 <Text style={styles.garitext}>GET GAARI</Text>
             </View>
             <ScrollView>
@@ -61,45 +59,53 @@ export default function OTPScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
     },
+
     container1: {
         alignItems: "center"
     },
-    appimg: {
+
+    appImage: {
         width: "60%",
         height: 110,
         marginTop: 60
     },
+
     garitext: {
         fontSize: 34,
         fontWeight: 'bold',
         letterSpacing: 2,
         color: "#ad001c"
     },
+
     container2: {
         marginLeft: 20,
         marginRight: 20,
         marginTop: 40
     },
+
     otptext: {
         marginTop: 15,
         fontSize: 18,
         fontWeight: 'bold',
         color: "#ad001c",
     },
+
     codesms: {
         marginTop: 15,
         fontSize: 18,
     },
+
     fontextverification: {
         fontSize: 18,
         fontWeight: 'bold',
     },
+
     signincontainer: {
         alignItems: "center",
         marginTop: 10
     },
+
     Signuptext: {
         fontSize: 24,
         marginTop: 50,
@@ -114,17 +120,21 @@ const styles = StyleSheet.create({
         color: "white",
         borderRadius: 10,
     },
+
     alreadyaccountview: {
         flexDirection: "row",
         marginTop: 30
     },
+
     alreadyaccount: {
         fontSize: 18
     },
+
     Signinext: {
         fontSize: 18,
         color: "#ad001c"
     },
+
     root: {
         flex: 1,
         padding: 20
@@ -133,6 +143,7 @@ const styles = StyleSheet.create({
     codeFieldRoot: {
         marginTop: 20
     },
+
     cell: {
         width: "15%",
         height: 40,
@@ -142,6 +153,7 @@ const styles = StyleSheet.create({
         borderColor: '#00000030',
         textAlign: 'center',
     },
+
     focusCell: {
         borderColor: '#000',
     },

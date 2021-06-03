@@ -34,7 +34,7 @@ export default function MySawariListScreen({ props, navigation }) {
         console.log(item)
     }
 
-    const addSawariComponent = <TouchableOpacity style={{ marginRight: 10, alignSelf: 'flex-end' }} onPress={() => navigation.navigate('AddSawariScreen')}>
+    const addSawariComponent = <TouchableOpacity style={{ marginRight: 10, alignSelf: 'flex-end' }} onPress={() => navigation.navigate(Constants.NavigationItems.AddSawariScreen)}>
         <MaterialCommunityIcons name="plus-thick" size={26} color={Constants.Colors.WHITE} />
     </TouchableOpacity>
 
@@ -46,7 +46,7 @@ export default function MySawariListScreen({ props, navigation }) {
                     data={sawariList}
                     renderItem={({ item }) =>
                         <View style={styles.GridViewBlockStyle}>
-                            <HomeCard style={{ height: 350, width: '100%' }} title="DATA" customClick={() => navigation.navigate('SawariDetails')} />
+                            <HomeCard style={{ height: 350, width: '100%' }} title="DATA" customClick={() => navigation.navigate(Constants.NavigationItems.SawariDetailsScreen)} />
                         </View>
                     }
                     showsVerticalScrollIndicator={false}

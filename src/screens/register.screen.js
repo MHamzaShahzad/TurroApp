@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, StatusBar, TextInput, ScrollView } from 'react-native';
 
 import app from '../assets/app_icon.png';
+import Constants from '../utils/constants';
 
 export default function RegisterScreen({ navigation }) {
     return (
@@ -34,11 +35,11 @@ export default function RegisterScreen({ navigation }) {
                 </View>
                 <View style={styles.container4}>
 
-                    <Text style={styles.Signuptext} onPress={() => navigation.navigate("Signin")} >Sign up</Text>
+                    <Text style={styles.Signuptext} >Sign up</Text>
 
                     <View style={styles.alreadyaccountview}>
                         <Text style={styles.alreadyaccount}>Already have an Account ? </Text>
-                        <Text style={styles.Signinext}>Sign In</Text>
+                        <Text style={styles.Signinext} onPress={() => navigation.navigate(Constants.NavigationItems.AuthScreen)}>Sign In</Text>
                     </View>
                 </View>
             </ScrollView>

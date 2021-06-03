@@ -43,14 +43,14 @@ export default function HomeScreen({ props, navigation }) {
     }
 
     const viewDetails = (sawari) => {
-        navigation.navigate('SawariDetails')
+        navigation.navigate(Constants.NavigationItems.SawariDetailsScreen)
     }
 
     const viewAll = (category) => {
-        navigation.navigate('SawariListScreen')
+        navigation.navigate(Constants.NavigationItems.SawariListScreen)
     }
     const applyFilter = (category) => {
-        navigation.navigate('FilterSawariScreen')
+        navigation.navigate(Constants.NavigationItems.FilterSawariScreen)
     }
 
     return (

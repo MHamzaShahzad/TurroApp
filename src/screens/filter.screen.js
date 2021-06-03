@@ -28,7 +28,7 @@ export default function FilterSawari({ props, navigation }) {
         value: null,
     };
     const AdvanceFilter = (category) => {
-        navigation.navigate("AdvanceFilterScreen")
+        navigation.navigate(Constants.NavigationItems.AdvanceFilterScreen)
     }
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Constants.Colors.WHITE }}>
