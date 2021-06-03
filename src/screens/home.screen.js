@@ -56,8 +56,8 @@ export default function HomeScreen({ props, navigation }) {
     return (
         <>
             <Header />
-            <StatusBar barStyle="light-content" backgroundColor={Constants.Colors.PRIMARY} />
-            <SafeAreaView style={{ flex: 1, padding: 10 }}>
+            <StatusBar barStyle={'light-content'} backgroundColor={Constants.Colors.PRIMARY}/>
+            <SafeAreaView style={{ flex: 1, }}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={styles.GridViewBlockStyle}>
                         <SimpleCard style={{ height: 50, width: "100%" }} title="Search" customClick={() => applyFilter("search filter")} />

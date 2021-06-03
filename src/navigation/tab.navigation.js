@@ -9,19 +9,19 @@ const Tab = createBottomTabNavigator();
 
 export default function HomeTabNavigation() {
     return (
-        <Tab.Navigator barStyle={{ paddingBottom: 48 }} initialRouteName="HomeSawari">
+        <Tab.Navigator barStyle={{ paddingBottom: 48 }} initialRouteName={Constants.NavigationItems.SawariHomeScreen} >
 
-            <Tab.Screen name={Constants.NavigationItems.MySawariListScreen} component={Screens.MySawariListScreen}
+            <Tab.Screen name={Constants.NavigationItems.SawariHomeScreen} component={Screens.HomeScreen}
                 options={{
-                    title: "Rent My Sawari",
+                    title: "Get A Sawari",
                     headerShown: false, tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons name="car" color={color} size={26} />
                     ),
                 }} />
 
-            <Tab.Screen name={Constants.NavigationItems.SawariHomeScreen} component={Screens.HomeScreen}
+            <Tab.Screen name={Constants.NavigationItems.MySawariListScreen} component={Screens.MySawariListScreen}
                 options={{
-                    title: "Get A Sawari",
+                    title: "Rent My Sawari",
                     headerShown: false, tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons name="car" color={color} size={26} />
                     ),

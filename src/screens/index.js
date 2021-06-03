@@ -13,7 +13,7 @@ import OTPScreen from './otp.screen'
 import ProfileScreen from './profile.screen'
 import ChooseItem from './choose.screen'
 import AdvanceFilterScreen from './advance_filter.screen'
-
+import BookSawariScreen from './book.screen'
 
 export default {
     AuthScreen,
@@ -30,5 +30,6 @@ export default {
     OTPScreen,
     ProfileScreen,
     ChooseItem,
-    AdvanceFilterScreen
+    AdvanceFilterScreen,
+    BookSawariScreen
 }

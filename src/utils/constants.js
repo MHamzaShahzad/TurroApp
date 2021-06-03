@@ -6,7 +6,7 @@ export default {
         BLACK: '#000'
     },
     Fonts: {
-        FAMILY: 'cochin'
+        FAMILY: 'arial'
     },
     NavigationItems: {
         SawariHomeScreen: "SawariHome",
@@ -23,6 +23,7 @@ export default {
         AdvanceFilterScreen: "AdvanceFilterScreen",
         AuthScreen: "AuthScreen",
         DrawerBottomTabs: "DrawerBottomTabs",
-        MySawariListScreen: "MySawariListScreen"
+        MySawariListScreen: "MySawariListScreen",
+        BookSawariScreen: "BookSawariScreen",
     }
 }

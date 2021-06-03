@@ -1,101 +1,101 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, StatusBar, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, SafeAreaView, TextInput, ScrollView } from 'react-native';
 
 import app from '../assets/app_icon.png';
 import Constants from '../utils/constants';
+import SimpleCard from '../components/cards/simple.card.component';
 
 export default function RegisterScreen({ navigation }) {
     return (
-
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <View style={styles.container1}>
-                <Image source={app} style={styles.appimg} />
-                <Text style={styles.garitext}>GET GAARI</Text>
+                <Image source={app} style={styles.appImage} resizeMode='contain'/>
+                <Text style={styles.sawariTextStyle}>GET SAWARI</Text>
             </View>
             <ScrollView>
                 <View style={styles.container2}>
-                    <Text style={styles.nametext}>Name</Text>
-                    <TextInput placeholder="Enter Name" style={styles.nameinput} />
+                    <Text style={styles.textStyleFieldName}>Name</Text>
+                    <TextInput placeholder="Enter Name" style={styles.inputFieldStyle} />
+                </View>
+                <View style={styles.container2}>
+                    <Text style={styles.textStyleFieldName}>E-mail</Text>
+                    <TextInput placeholder="Enter E-mail" style={styles.inputFieldStyle} />
+                </View>
+                <View style={styles.container2}>
+                    <Text style={styles.textStyleFieldName}>Number</Text>
+                    <TextInput placeholder="Enter Number" style={styles.inputFieldStyle} />
+                </View>
+                <View style={styles.container2}>
+                    <Text style={styles.textStyleFieldName}>Password</Text>
+                    <TextInput placeholder="Enter Password" style={styles.inputFieldStyle} />
+                </View>
+                <View style={styles.container2}>
+                    <Text style={styles.textStyleFieldName}>Confirm Password</Text>
+                    <TextInput placeholder="Enter Confirm Password" style={styles.inputFieldStyle} />
                 </View>
                 <View style={styles.container3}>
-                    <Text style={{ fontSize: 16 }}>E-mail</Text>
-                    <TextInput placeholder="Enter E-mail" style={styles.nameinput} />
-                </View>
-                <View style={styles.container3}>
-                    <Text style={{ fontSize: 16 }}>Number</Text>
-                    <TextInput placeholder="Enter Number" style={styles.nameinput} />
-                </View>
-                <View style={styles.container3}>
-                    <Text style={{ fontSize: 16 }}>Password</Text>
-                    <TextInput placeholder="Password" style={styles.nameinput} />
-                </View>
-                <View style={styles.container3}>
-                    <Text style={styles.fontext}>Confirm Password</Text>
-                    <TextInput placeholder="Confirm Password" style={styles.nameinput} />
-                </View>
-                <View style={styles.container4}>
-
-                    <Text style={styles.Signuptext} >Sign up</Text>
-
-                    <View style={styles.alreadyaccountview}>
-                        <Text style={styles.alreadyaccount}>Already have an Account ? </Text>
-                        <Text style={styles.Signinext} onPress={() => navigation.navigate(Constants.NavigationItems.AuthScreen)}>Sign In</Text>
+                    <SimpleCard style={styles.signUpButtonStyle} title={"Sign Up"} />
+                    <View style={styles.alreadyHaveAccountView}>
+                        <Text style={styles.alreadyHaveAccountTextStyle}>Already have an Account ? </Text>
+                        <Text style={styles.signInTextStyle} onPress={() => navigation.navigate(Constants.NavigationItems.AuthScreen)}>Sign In</Text>
                     </View>
                 </View>
             </ScrollView>
-            <StatusBar style="auto" />
-        </View>
+        </SafeAreaView>
     );
 }
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
     },
+
     container1: {
         alignItems: "center"
     },
-    appimg: {
-        width: "60%",
-        height: 110,
-        marginTop: 60
-    },
-    garitext: {
-        fontSize: 34,
-        fontWeight: 'bold',
-        letterSpacing: 2,
-        color: "#ad001c"
-    },
+
     container2: {
         marginLeft: 20,
         marginRight: 20,
         marginTop: 10
     },
-    nametext: {
+
+    container3: {
+        alignItems: "center",
+        marginTop: 15
+    },
+
+    appImage: {
+        width: "60%",
+        height: 110,
+        marginTop: 60
+    },
+
+    sawariTextStyle: {
+        fontSize: 34,
+        fontWeight: 'bold',
+        letterSpacing: 2,
+        color: Constants.Colors.PRIMARY
+    },
+    
+    textStyleFieldName: {
         fontSize: 16
     },
-    nameinput: {
+
+    inputFieldStyle: {
         height: 45,
         marginTop: 7,
         fontSize: 18,
         paddingLeft: 10,
         borderRadius: 10,
         elevation: 5,
-        backgroundColor: "white"
+        backgroundColor: Constants.Colors.WHITE,
+        shadowColor: '#000',
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+        shadowOffset: { width: 1, height: 1 },
     },
-    container3: {
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop: 6
-    },
-    fontext: {
-        fontSize: 16
-    },
-    container4: {
-        alignItems: "center",
-        marginTop: 15
-    },
-    Signuptext: {
+    
+    signUpButtonStyle: {
         fontSize: 24,
         marginTop: 25,
         width: "60%",
@@ -103,21 +103,25 @@ const styles = StyleSheet.create({
         textAlign: "center",
         paddingTop: 7,
         elevation: 5,
-        backgroundColor: "white",
+        backgroundColor: Constants.Colors.WHITE,
         fontWeight: 'bold',
-        backgroundColor: "#ad001c",
-        color: "white",
+        backgroundColor: Constants.Colors.PRIMARY,
+        color: Constants.Colors.WHITE,
         borderRadius: 10,
     },
-    alreadyaccountview: {
+
+    alreadyHaveAccountView: {
         flexDirection: "row",
         marginTop: 28
     },
-    alreadyaccount: {
+
+    alreadyHaveAccountTextStyle: {
         fontSize: 18
     },
-    Signinext: {
+
+    signInTextStyle: {
         fontSize: 18,
-        color: "#ad001c"
+        color: Constants.Colors.PRIMARY
     },
+
 });

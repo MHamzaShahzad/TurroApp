@@ -4,17 +4,18 @@ import {
     Text,
     View,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    StatusBar
 } from 'react-native';
 import Styles from '../styles';
 import SimpleCard from '../components/cards/simple.card.component';
 import logoCS from '../assets/app_icon.png';
 import closeIcon from '../assets/icon_close.png';
 
-
 export default function AuthScreen({navigation}) {
     return (
         <SafeAreaView style={{ flex: 1 }}>
+            <StatusBar barStyle={'dark-content'} />
             <View style={Styles.AppStyles.container}>
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ alignItems: 'center', alignSelf: 'flex-end', marginRight: 10}}>
                     <Image source={closeIcon} style={{height: 30, width: 30}} resizeMode='contain' />

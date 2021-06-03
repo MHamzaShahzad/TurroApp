@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, StatusBar, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 
 import { CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell, } from 'react-native-confirmation-code-field';
 
 import app from '../assets/app_icon.png';
+import Constants from '../utils/constants';
+import SimpleCard from '../components/cards/simple.card.component';
 
 export default function OTPScreen({ navigation }) {
     const CELL_COUNT = 6;
@@ -15,14 +17,14 @@ export default function OTPScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={styles.container1}>
-                <Image source={app} style={styles.appImage} />
-                <Text style={styles.garitext}>GET GAARI</Text>
+                <Image source={app} style={styles.appImage} resizeMode='contain'/>
+                <Text style={styles.sawariTextStyle}>GET SAWARI</Text>
             </View>
             <ScrollView>
                 <View style={styles.container2}>
-                    <Text style={styles.fontextverification}>Number Verification</Text>
-                    <Text style={styles.otptext}>Enter Your OTP</Text>
-                    <Text style={styles.codesms}>Enter 6 Digit Code sent Via SMS</Text>
+                    <Text style={styles.numberVerificationTextStyle}>Number Verification</Text>
+                    <Text style={styles.otpTextStyle}>Enter Your OTP</Text>
+                    <Text style={styles.enterCodeTextStyle}>Enter 6 Digit Code sent Via SMS</Text>
                     <View style={styles.root}>
                         <CodeField
                             ref={ref} {...props}
@@ -44,15 +46,14 @@ export default function OTPScreen({ navigation }) {
                         />
                     </View>
                 </View>
-                <View style={styles.signincontainer}>
-                    <View style={styles.alreadyaccountview}>
-                        <Text style={styles.alreadyaccount}>Didn't receive the Code? </Text>
-                        <Text style={styles.Signinext}>Send Again</Text>
+                <View style={styles.container3}>
+                    <View style={styles.didNotReceiveCodeViewStyle}>
+                        <Text style={styles.didNotReceiveCodeTextStyle}>Didn't receive the Code? </Text>
+                        <Text style={styles.sendCodeAgainTextStyle}>Send Again</Text>
                     </View>
-                    <Text style={styles.Signuptext} >Verify</Text>
+                    <SimpleCard style={styles.verifyAndSignInButtonStyle} title={"Verify"} />
                 </View>
             </ScrollView>
-            <StatusBar style="auto" />
         </View>
     );
 }
@@ -65,48 +66,48 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
 
-    appImage: {
-        width: "60%",
-        height: 110,
-        marginTop: 60
-    },
-
-    garitext: {
-        fontSize: 34,
-        fontWeight: 'bold',
-        letterSpacing: 2,
-        color: "#ad001c"
-    },
-
     container2: {
         marginLeft: 20,
         marginRight: 20,
         marginTop: 40
     },
 
-    otptext: {
-        marginTop: 15,
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: "#ad001c",
-    },
-
-    codesms: {
-        marginTop: 15,
-        fontSize: 18,
-    },
-
-    fontextverification: {
-        fontSize: 18,
-        fontWeight: 'bold',
-    },
-
-    signincontainer: {
+    container3: {
         alignItems: "center",
         marginTop: 10
     },
 
-    Signuptext: {
+    appImage: {
+        width: "60%",
+        height: 110,
+        marginTop: 60
+    },
+
+    sawariTextStyle: {
+        fontSize: 34,
+        fontWeight: 'bold',
+        letterSpacing: 2,
+        color: Constants.Colors.PRIMARY
+    },
+
+    otpTextStyle: {
+        marginTop: 15,
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: Constants.Colors.PRIMARY,
+    },
+
+    enterCodeTextStyle: {
+        marginTop: 15,
+        fontSize: 18,
+    },
+
+    numberVerificationTextStyle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+
+    verifyAndSignInButtonStyle: {
         fontSize: 24,
         marginTop: 50,
         width: "70%",
@@ -114,25 +115,25 @@ const styles = StyleSheet.create({
         textAlign: "center",
         paddingTop: 7,
         elevation: 5,
-        backgroundColor: "white",
+        backgroundColor: Constants.Colors.WHITE,
         fontWeight: 'bold',
-        backgroundColor: "#ad001c",
-        color: "white",
+        backgroundColor: Constants.Colors.PRIMARY,
+        color: Constants.Colors.WHITE,
         borderRadius: 10,
     },
 
-    alreadyaccountview: {
+    didNotReceiveCodeViewStyle: {
         flexDirection: "row",
         marginTop: 30
     },
 
-    alreadyaccount: {
+    didNotReceiveCodeTextStyle: {
         fontSize: 18
     },
 
-    Signinext: {
+    sendCodeAgainTextStyle: {
         fontSize: 18,
-        color: "#ad001c"
+        color: Constants.Colors.PRIMARY
     },
 
     root: {

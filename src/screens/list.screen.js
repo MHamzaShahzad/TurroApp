@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, FlatList, Text, SafeAreaView, ScrollView } from 'react-native';
+import { View, StyleSheet, FlatList, SafeAreaView, TouchableOpacity } from 'react-native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import HomeCard from '../components/cards/home.card.component';
 import Constants from '../utils/constants';
@@ -32,9 +33,17 @@ export default function ItemsScreen({ props, navigation }) {
         console.log(item)
     }
 
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+          headerRight: () => (
+            <MaterialIcons name="search" style={{marginRight: 10}} size={26} color={Constants.Colors.WHITE} onPress={() => navigation.navigate(Constants.NavigationItems.FilterSawariScreen)} />
+          ),
+        });
+      }, [navigation]);
+
     return (
         <>
-            <SafeAreaView style={{ flex: 1, padding: 10 }}>
+            <SafeAreaView style={{ flex: 1 }}>
                 <FlatList
                     data={sawariList}
                     renderItem={({ item }) =>

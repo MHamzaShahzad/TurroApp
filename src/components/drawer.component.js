@@ -24,14 +24,14 @@ export default function DrawerContent({ props, navigation }) {
 
       <View style={styles.navItemContainer}>
         <Image source={login} style={styles.navItemIconStyle} resizeMode='contain' />
-        <TouchableOpacity onPress={() => drawerNavigationItemClick('ProfileScreen')}>
+        <TouchableOpacity onPress={() => drawerNavigationItemClick(Constants.NavigationItems.AuthScreen)}>
           <Text style={styles.navItemTextStyle}>Login or Sign Up</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.navItemContainer}>
         <Image source={globe} style={styles.navItemIconStyle} resizeMode='contain' />
-        <TouchableOpacity onPress={() => drawerNavigationItemClick('ChooseItem')}>
+        <TouchableOpacity onPress={() => drawerNavigationItemClick(Constants.NavigationItems.ChooseItemScreen)}>
           <Text style={styles.navItemTextStyle}>Visit Website</Text>
         </TouchableOpacity>
       </View>

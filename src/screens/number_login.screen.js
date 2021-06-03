@@ -1,77 +1,85 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, StatusBar, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, ScrollView } from 'react-native';
 
 import app from '../assets/app_icon.png';
 import Constants from '../utils/constants';
+import SimpleCard from '../components/cards/simple.card.component';
 
 export default function NumberLoginScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={styles.container1}>
-                <Image source={app} style={styles.appimg} />
-                <Text style={styles.garitext}>GET GAARI</Text>
+                <Image source={app} style={styles.appImage} resizeMode='contain'/>
+                <Text style={styles.sawaariTextStyle}>GET SAWARI</Text>
             </View>
             <ScrollView>
                 <View style={styles.container2}>
-                    <Text style={styles.fontext}>Number</Text>
-                    <TextInput placeholder="Enter Number" style={styles.nameinput} />
+                    <Text style={styles.textStyleFieldName}>Number</Text>
+                    <TextInput placeholder="Enter Number" style={styles.inputFieldStyle} />
                 </View>
-                <View style={styles.signincontainer}>
-                    <Text style={styles.Signuptext} onPress={() => navigation.navigate(Constants.NavigationItems.OTPScreen)} >Sign In</Text>
-                    <View style={styles.alreadyaccountview}>
-                        <Text style={styles.alreadyaccount}>Don't have an Account ? </Text>
-                        <Text style={styles.Signinext}>Sign Up</Text>
+                <View style={styles.container3}>
+                    <SimpleCard style={styles.signInButtonStyle} title={"Sign In"} customClick={() => navigation.navigate(Constants.NavigationItems.OTPScreen)} />
+                    <View style={styles.doNotHaveAccountViewStyle}>
+                        <Text style={styles.doNotHaveAccountTextStyle}>Don't have an Account ? </Text>
+                        <Text style={styles.signUpTextStyle} onPress={() => navigation.navigate(Constants.NavigationItems.RegisterScreen)}>Sign Up</Text>
                     </View>
                 </View>
             </ScrollView>
-            <StatusBar style="auto" />
         </View>
     );
 }
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
     },
+
     container1: {
         alignItems: "center"
     },
-    appimg: {
-        width: "60%",
-        height: 110,
-        marginTop: 60
-    },
-    garitext: {
-        fontSize: 34,
-        fontWeight: 'bold',
-        letterSpacing: 2,
-        color: "#ad001c"
-    },
+
     container2: {
         marginLeft: 20,
         marginRight: 20,
         marginTop: 40
     },
-    nametext: {
-        fontSize: 16
+
+    container3: {
+        alignItems: "center",
+        marginTop: 240
     },
-    nameinput: {
+
+    appImage: {
+        width: "60%",
+        height: 110,
+        marginTop: 60
+    },
+
+    sawaariTextStyle: {
+        fontSize: 34,
+        fontWeight: 'bold',
+        letterSpacing: 2,
+        color: Constants.Colors.PRIMARY
+    },
+
+    inputFieldStyle: {
         height: 45,
         marginTop: 7,
         fontSize: 18,
         paddingLeft: 10,
         borderRadius: 10,
         elevation: 5,
-        backgroundColor: "white"
+        backgroundColor: Constants.Colors.WHITE,
+        shadowColor: '#000',
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+        shadowOffset: { width: 1, height: 1 },
     },
-    fontext: {
+
+    textStyleFieldName: {
         fontSize: 16
     },
-    signincontainer: {
-        alignItems: "center",
-        marginTop: 240
-    },
-    Signuptext: {
+
+    signInButtonStyle: {
         fontSize: 24,
         marginTop: 25,
         width: "70%",
@@ -79,21 +87,24 @@ const styles = StyleSheet.create({
         textAlign: "center",
         paddingTop: 7,
         elevation: 5,
-        backgroundColor: "white",
+        backgroundColor: Constants.Colors.WHITE,
         fontWeight: 'bold',
-        backgroundColor: "#ad001c",
-        color: "white",
+        backgroundColor: Constants.Colors.PRIMARY,
+        color: Constants.Colors.WHITE,
         borderRadius: 10,
     },
-    alreadyaccountview: {
+
+    doNotHaveAccountViewStyle: {
         flexDirection: "row",
         marginTop: 45
     },
-    alreadyaccount: {
+
+    doNotHaveAccountTextStyle: {
         fontSize: 18
     },
-    Signinext: {
+
+    signUpTextStyle: {
         fontSize: 18,
-        color: "#ad001c"
+        color: Constants.Colors.PRIMARY
     },
 });
