@@ -27,6 +27,9 @@ export default function FilterSawari({ props, navigation }) {
         label: 'Select your rent range in Rupees',
         value: null,
     };
+    const AdvanceFilter = (category) => {
+        navigation.navigate("AdvanceFilterScreen")
+    }
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Constants.Colors.WHITE }}>
             <View style={style.container}>
@@ -43,7 +46,7 @@ export default function FilterSawari({ props, navigation }) {
                 </View>
                 <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 8 }}>
                     <SimpleCard style={{ width: 180, height: 50, flexDirection: "row", backgroundColor: Constants.Colors.WHITE, text: { color: Constants.Colors.PRIMARY } }}
-                        title={"Advanced Search"} image={"plus"} size={24} icon_color={Constants.Colors.PRIMARY}></SimpleCard>
+                        title={"Advanced Search"} image={"plus"} size={24} icon_color={Constants.Colors.PRIMARY} customClick={() => AdvanceFilter("Advance Filter")}></SimpleCard>
                 </View>
 
             </View>

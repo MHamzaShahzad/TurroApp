@@ -12,6 +12,8 @@ import RegisterScreen from './register.screen'
 import OTPScreen from './otp.screen'
 import ProfileScreen from './profile.screen'
 import ChooseItem from './choose.screen'
+import AdvanceFilterScreen from './advance_filter.screen'
+
 
 export default {
     AuthScreen,
@@ -27,5 +29,6 @@ export default {
     RegisterScreen,
     OTPScreen,
     ProfileScreen,
-    ChooseItem
+    ChooseItem,
+    AdvanceFilterScreen
 }

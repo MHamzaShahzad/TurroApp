@@ -32,6 +32,8 @@ function MainStackNavigator() {
                 <Stack.Screen name="FilterSawariScreen" component={Screens.SawariFilterScreen} options={{ title: "Search Sawari" }} />
                 <Stack.Screen name="ProfileScreen" component={Screens.ProfileScreen} options={{ title: "Profile" }} />
                 <Stack.Screen name="ChooseItem" component={Screens.ChooseItem} options={{ title: "Choose Item" }} />
+                <Stack.Screen name="AdvanceFilterScreen" component={Screens.AdvanceFilterScreen} options={{ title: "Advacne Filter" }} />
+
             </Stack.Navigator>
         </NavigationContainer>
     );
