@@ -4,26 +4,143 @@ import { StyleSheet, Text, View, Image, TextInput, ScrollView } from 'react-nati
 import app from '../assets/app_icon.png';
 import Constants from '../utils/constants';
 import SimpleCard from '../components/cards/simple.card.component';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+var myData;
 export default function EmailLoginScreen({ navigation }) {
+    const [isLoading, setLoading] = React.useState(false)
+    const [data, setData] = React.useState({
+        uemail: '',
+        upass: '',
+        isValidEmail: true,
+        isValidPass: true,
+    });
+    const [isDisable, setDisable] = React.useState(false);
+    const LoginUser = () => {
+
+        if (data.uemail.length == 0) {
+            setData({
+                ...data,
+                isValidEmail: false
+            });
+        }
+        else if (data.upass.length == 0) {
+            setData({
+                ...data,
+                isValidPass: false
+            });
+        }
+        else {
+            setData({
+                ...data,
+                isLoading: true,
+            });
+            setDisable(true)
+            setLoading(true)
+            console.log("All data valid")
+            // Make a request for a user with a given Email&Pass
+            /* const url = Constants.BASE_URL + 'api/user/login?email=' + data.uemail + '&password=' + data.upass + '&lat_long=' + lat_long;
+            console.log("login url = " + url);
+            axios.get(url)
+                .then(function (response) {
+                    // handle success
+                    setLoading(false)
+                    setDisable(false)
+                    console.log(response.data);
+                    if (response.data === 0) {
+                        alert('Invalid Credentials');
+                        setData({
+                            ...data,
+                            isLoading: false,
+                        });
+                    }
+                    else {
+                        myData = JSON.stringify(response.data);
+                        console.log("Response Data into object Form" + myData);
+                        try {
+                            console.log("save user data called...")
+                            AsyncStorage.setItem('userData', myData)
+                        } catch (e) {
+                            console.log("Error = " + e)
+                            // saving error
+                        }
+                    }
+                })
+                .catch(function (error) {
+                    // handle error
+                    setDisable(false)
+                    setLoading(false)
+                    alert('Please check your internet connection and try again')
+                    console.log(error);
+                }) */
+        }
+    }
+
+    const EmailTextChange = (val) => {
+        if (val.length == 0) {
+            setData({
+                ...data,
+                uemail: val,
+                isValidEmail: false
+            });
+        }
+        else {
+            setData({
+                ...data,
+                uemail: val,
+                isValidEmail: true
+            });
+        }
+
+
+    }
+    const PassTextChange = (val) => {
+        if (val.length == 0) {
+            setData({
+                ...data,
+                upass: val,
+                isValidPass: false
+            });
+        }
+        else {
+            setData({
+                ...data,
+                upass: val,
+                isValidPass: true
+            });
+        }
+
+
+    }
     return (
         <View style={styles.container}>
-            <View style={styles.container1}>
-                <Image source={app} style={styles.appImage} resizeMode='contain'/>
-                <Text style={styles.sawariTextStyle}>GET SAWARI</Text>
-            </View>
             <ScrollView>
+                <View style={styles.container1}>
+                    <Image source={app} style={styles.appImage} resizeMode='contain' />
+                    <Text style={styles.sawariTextStyle}>GET SAWARI</Text>
+                </View>
+
                 <View style={styles.container2}>
                     <Text style={styles.textStyleFieldName}>E-mail</Text>
-                    <TextInput placeholder="Enter E-mail" style={styles.inputFieldStyle} />
+                    <TextInput placeholder="Enter E-mail" style={styles.inputFieldStyle}
+                        color={Constants.Colors.BLACK}
+                        placeholderTextColor={Constants.Colors.GREY}
+                        onChangeText={(val) => EmailTextChange(val)} />
+                    {data.isValidEmail ? null : <Text style={{ color: '#FF0000' }}>Email must be required</Text>}
                 </View>
                 <View style={styles.container3}>
                     <Text style={styles.textStyleFieldName}>Password</Text>
-                    <TextInput placeholder="Password" style={styles.inputFieldStyle} />
+                    <TextInput placeholder="Password"
+                        style={styles.inputFieldStyle}
+                        secureTextEntry={true}
+                        color={Constants.Colors.BLACK}
+                        placeholderTextColor={Constants.Colors.GREY}
+                        onChangeText={(val) => PassTextChange(val)} />
+                    {data.isValidPass ? null : <Text style={{ color: '#FF0000' }}>Password must be required</Text>}
                 </View>
                 <Text style={{ margin: 20, fontSize: 18 }}>Forget Password?</Text>
                 <View style={styles.container4}>
-                    <SimpleCard style={styles.signInButtonStyle} title={"Sign In"} />
+                    <SimpleCard style={styles.signInButtonStyle} title={"Sign In"} customClick={LoginUser} />
                     <View style={styles.doNotHaveAccountViewStyle}>
                         <Text style={styles.doNotHaveAccountTextStyle}>Don't have an Account ? </Text>
                         <Text style={styles.signUpTextStyle} onPress={() => navigation.navigate(Constants.NavigationItems.RegisterScreen)}>Sign Up</Text>
@@ -79,7 +196,7 @@ const styles = StyleSheet.create({
     inputFieldStyle: {
         height: 45,
         marginTop: 7,
-        fontSize: 18,
+        fontSize: 16,
         paddingLeft: 10,
         borderRadius: 10,
         elevation: 5,

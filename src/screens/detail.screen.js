@@ -127,12 +127,13 @@ export default function DescriptionScreen({ props, navigation }) {
                         </View>
                     </View>
                 </ScrollView>
-                <SimpleCard style={{}} title="Book Now" customClick={ () => navigation.navigate(Constants.NavigationItems.BookSawariScreen)} />
+                <SimpleCard style={{}} title="Book Now" customClick={() => navigation.navigate(Constants.NavigationItems.BookSawariScreen)} />
             </SafeAreaView>
             <View style={style.bottomTabs}>
-                <TouchableOpacity style={{ flex: 0.5, justifyContent: 'center', alignItems: 'center', backgroundColor: Constants.Colors.PRIMARY }}>
+                <TouchableOpacity style={{ flex: 0.5, justifyContent: 'center', alignItems: 'center', backgroundColor: Constants.Colors.WHITE }}>
                     <Text>Make Call</Text>
                 </TouchableOpacity>
+                <View style={{ width: 1, height: "100%", backgroundColor: Constants.Colors.BLACK }}></View>
                 <TouchableOpacity style={{ flex: 0.5, justifyContent: 'center', alignItems: 'center', backgroundColor: Constants.Colors.WHITE }}>
                     <Text>Send SMS</Text>
                 </TouchableOpacity>

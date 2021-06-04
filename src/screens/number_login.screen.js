@@ -8,11 +8,12 @@ import SimpleCard from '../components/cards/simple.card.component';
 export default function NumberLoginScreen({ navigation }) {
     return (
         <View style={styles.container}>
-            <View style={styles.container1}>
-                <Image source={app} style={styles.appImage} resizeMode='contain'/>
-                <Text style={styles.sawaariTextStyle}>GET SAWARI</Text>
-            </View>
             <ScrollView>
+                <View style={styles.container1}>
+                    <Image source={app} style={styles.appImage} resizeMode='contain' />
+                    <Text style={styles.sawaariTextStyle}>GET SAWARI</Text>
+                </View>
+
                 <View style={styles.container2}>
                     <Text style={styles.textStyleFieldName}>Number</Text>
                     <TextInput placeholder="Enter Number" style={styles.inputFieldStyle} />

@@ -1,4 +1,5 @@
 export default {
+    BASE_URL: "http://192.168.1.1/",///Replace with live url before production  
     Colors: {
         PRIMARY: '#fa9b17',
         WHITE: '#ffffff',
