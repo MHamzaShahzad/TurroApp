@@ -5,6 +5,7 @@ import Constants from '../utils/constants';
 import SimpleCard from '../components/cards/simple.card.component';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import loginApiCall from '../utils/api.utils';
+import { StackActions } from '@react-navigation/native';
 var u_json_data;
 export default function EmailLoginScreen({ navigation }) {
     const [isLoading, setLoading] = React.useState(false)
@@ -65,6 +66,9 @@ export default function EmailLoginScreen({ navigation }) {
                     // saving error
                 }
                 removeLoader()
+                navigation.dispatch(StackActions.popToTop());
+                navigation.replace(Constants.NavigationItems.SawariHomeScreen)
+
             }
         }
     }

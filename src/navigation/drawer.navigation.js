@@ -8,9 +8,9 @@ const Drawer = createDrawerNavigator();
 
 export default function HomeDrawerNavigation() {
     return (
-        <Drawer.Navigator  initialRouteName={Constants.NavigationItems.DrawerBottomTabs} drawerContent={(props) => <DrawerContent {...props} />} >
+        <Drawer.Navigator initialRouteName={Constants.NavigationItems.DrawerBottomTabs} drawerContent={(props) => <DrawerContent {...props} />} >
             <Drawer.Screen name={Constants.NavigationItems.DrawerBottomTabs} component={HomeTabNavigation} options={{ headerShown: false }} />
-            <Drawer.Screen name={Constants.NavigationItems.AuthScreen} component={Screens.AuthScreen} options={{ title: "Sawari Login", }} />
+            <Drawer.Screen name={Constants.NavigationItems.AuthScreen} component={Screens.AuthScreen} options={{ title: 'Sarawi Login' }} />
         </Drawer.Navigator>
     );
 }

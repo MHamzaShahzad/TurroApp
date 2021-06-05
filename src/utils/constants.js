@@ -1,5 +1,5 @@
 export default {
-    BASE_URL: "http://a7429518cb55.ngrok.io/",///Replace with live url before production  
+    BASE_URL: "http://6f9adfb5b882.ngrok.io/",///Replace with live url before production  
     USER_DATA: 'userData',
     Colors: {
         PRIMARY: '#fa9b17',
