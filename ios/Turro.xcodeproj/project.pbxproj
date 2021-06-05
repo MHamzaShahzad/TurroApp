@@ -30,6 +30,7 @@
 		F55BF564C3BB4E40B5672C5E /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF9D006A4A9549C6A26E5130 /* FontAwesome5_Brands.ttf */; };
 		F79F23C90A76408E82BAC4E2 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 306760B87C1A4D6AA3C03F1F /* Entypo.ttf */; };
 		FA3B7BAE87444807B6AE24AF /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FDB8798E85247E3853DCE02 /* FontAwesome5_Solid.ttf */; };
+		FB8F724A266B85EF00215691 /* QBImagePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB8F7249266B85EF00215691 /* QBImagePicker.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		ED7EE6827D8C8426080537A7 /* Pods-Turro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Turro.release.xcconfig"; path = "Target Support Files/Pods-Turro/Pods-Turro.release.xcconfig"; sourceTree = "<group>"; };
 		ED992DB49B1C4C18A581112B /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		F4967D93B3F14ED2AFC6129D /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		FB8F7249266B85EF00215691 /* QBImagePicker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = QBImagePicker.storyboard; path = "../node_modules/react-native-image-crop-picker/ios/QBImagePicker/QBImagePicker/QBImagePicker.storyboard"; sourceTree = "<group>"; };
 		FE9BE3DBE745C7F6E8E97886 /* libPods-Turro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Turro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -148,6 +150,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				FB8F7249266B85EF00215691 /* QBImagePicker.storyboard */,
 				13B07FAE1A68108700A75B9A /* Turro */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* TurroTests */,
@@ -298,6 +301,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB8F724A266B85EF00215691 /* QBImagePicker.storyboard in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				0D867B52F52E4FEA8A892BBE /* AntDesign.ttf in Resources */,
