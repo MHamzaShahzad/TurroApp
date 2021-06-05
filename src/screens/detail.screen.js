@@ -148,9 +148,8 @@ export default function DescriptionScreen({ props, navigation }) {
                         <Text>Send SMS</Text>
                     </TouchableOpacity>
                 </View> */}
-                <SimpleCard style={{}} title="Book Now" customClick={() => navigation.navigate(Constants.NavigationItems.BookSawariScreen)} />
             </SafeAreaView>
-
+            <SimpleCard style={{marginBottom: 20, width: '40%', alignSelf: 'center'}} title="Book Now" customClick={() => navigation.navigate(Constants.NavigationItems.BookSawariScreen)} />
         </>
     )
 }

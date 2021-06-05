@@ -1,14 +1,50 @@
 import React from 'react'
-import { StyleSheet, SafeAreaView, View, Image, TextInput, Text, ScrollView } from 'react-native'
-import app from '../assets/app_icon.png';
+import { StyleSheet, SafeAreaView, View, Image, TextInput, Text, ScrollView, TouchableOpacity } from 'react-native'
+
 import Constants from '../utils/constants';
 import SimpleCard from '../components/cards/simple.card.component';
-import { Value } from 'react-native-reanimated';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import Moment from 'moment'
+
 export default function BookSawariScreen({ props, navigation }) {
+
+    const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
+    const [isTimePickerVisible, setTimePickerVisibility] = React.useState(false);
+    const [date, setDate] = React.useState({ from: "Select date from", to: "Select date to" })
+    const [time, setTime] = React.useState({ from: "Select time from", to: "Select time to" })
+
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+
+    const showTimePicker = () => {
+        setTimePickerVisibility(true);
+    };
+
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+
+    const hideTimePicker = () => {
+        setTimePickerVisibility(false);
+    };
+
+    const handleDateConfirm = (date) => {
+        console.warn("A date has been picked: ", date);
+        setDate({ from: Moment(date).format('l'), to: Moment(date).format('l') })
+        hideDatePicker();
+    };
+
+    const handleTimeConfirm = (time) => {
+        console.warn("A time has been picked: ", time);
+        Moment(time).format('LT').duration(Moment(time).format('LT'))
+        setTime({ from: Moment(time).format('LT'), to: Moment(time).format('LT') })
+        hideTimePicker();
+    };
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
-
                 <ScrollView>
                     <View style={styles.container2}>
                         <Text style={styles.textStyleFieldName}>Name</Text>
@@ -28,12 +64,30 @@ export default function BookSawariScreen({ props, navigation }) {
                     </View>
                     <View style={styles.container5}>
                         <View style={styles.container6}>
-                            <Text style={styles.textStyleFieldName}>Date</Text>
-                            <TextInput placeholder="Your Date" style={styles.inputFieldStyle} />
+                            <Text style={styles.textStyleFieldName}>Date From</Text>
+                            <TouchableOpacity onPress={showDatePicker} >
+                                <TextInput placeholder="Your Date" value={date.from} style={styles.inputFieldStyle} onPressIn={showDatePicker} editable={false} />
+                            </TouchableOpacity>
                         </View>
                         <View style={styles.container6}>
-                            <Text style={styles.textStyleFieldName}>Time</Text>
-                            <TextInput placeholder="Your Time" style={styles.inputFieldStyle} />
+                            <Text style={styles.textStyleFieldName}>Time From</Text>
+                            <TouchableOpacity onPress={showTimePicker}>
+                                <TextInput placeholder="Your Time" value={time.from} style={styles.inputFieldStyle} onPressIn={showTimePicker} editable={false} />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    <View style={styles.container5}>
+                        <View style={styles.container6}>
+                            <Text style={styles.textStyleFieldName}>Date To</Text>
+                            <TouchableOpacity onPress={showDatePicker}>
+                                <TextInput placeholder="Your Date" value={date.to} style={styles.inputFieldStyle} onPressIn={showDatePicker} editable={false} />
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.container6}>
+                            <Text style={styles.textStyleFieldName}>Time To</Text>
+                            <TouchableOpacity onPress={showTimePicker}>
+                                <TextInput placeholder="Your Time" value={time.to} style={styles.inputFieldStyle} onPressIn={showTimePicker} editable={false} />
+                            </TouchableOpacity>
                         </View>
                     </View>
                     <View style={styles.container3}>
@@ -42,11 +96,22 @@ export default function BookSawariScreen({ props, navigation }) {
                     </View>
 
                     <View style={styles.container4}>
-                        <SimpleCard style={styles.signInButtonStyle} title={"Confirm Booking"} />
-
+                        <SimpleCard style={styles.signInButtonStyle} title={"Confirm Booking"} customClick={showDatePicker} />
                     </View>
                 </ScrollView>
             </View>
+            <DateTimePickerModal
+                isVisible={isDatePickerVisible}
+                mode="date"
+                onConfirm={handleDateConfirm}
+                onCancel={hideDatePicker}
+            />
+            <DateTimePickerModal
+                isVisible={isTimePickerVisible}
+                mode="time"
+                onConfirm={handleTimeConfirm}
+                onCancel={hideTimePicker}
+            />
         </SafeAreaView>
     )
 }
@@ -109,8 +174,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
         paddingLeft: 10,
         borderRadius: 10,
-        borderWidth:1,
-        borderColor:"#DDDDDD",
+        borderWidth: 1,
+        borderColor: "#DDDDDD",
         shadowColor: '#000',
         shadowOpacity: 0.3,
         shadowRadius: 5,
