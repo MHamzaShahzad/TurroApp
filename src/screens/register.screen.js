@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, SafeAreaView, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, SafeAreaView, TextInput, ScrollView, ActivityIndicator } from 'react-native';
 
 import app from '../assets/app_icon.png';
 import Constants from '../utils/constants';
 import SimpleCard from '../components/cards/simple.card.component';
-import axios from 'axios';
+import registerApiCall from '../utils/api.utils';
 export default function RegisterScreen({ navigation }) {
     const [isLoading, seIsLoading] = useState(false);
     const [isDisable, setDisable] = React.useState(false);
@@ -23,7 +23,7 @@ export default function RegisterScreen({ navigation }) {
         isValidCpass: true,
 
     });
-    const registerUser = () => {
+    const registerUser = async () => {
         if (data.username.length == 0) {
             setData({
                 ...data,
@@ -56,46 +56,42 @@ export default function RegisterScreen({ navigation }) {
         }
         else {
             if (data.upass === data.ucpass) {
-                alert('Added')
-                // Make a request for a user with a given Email&Pass
-                /* seIsLoading(true);
-                setDisable(true);
+                seIsLoading(true)
+                setDisable(true)
                 const formData = new FormData();
                 formData.append('name', data.username);
                 formData.append('email', data.uemail);
                 formData.append('phone', data.uphone);
                 formData.append('password', data.upass);
-                formData.append('status', 1);
-                console.log('User Register Data = ' + JSON.stringify(formData));
-                //const url = constants.BASE_URL + 'api/user/register';
-                axios({
-                    method: 'post',
-                    url: url,
-                    data: formData
-                }).then(function (response) {
-                    //handle success
-                    seIsLoading(false);
-                    setDisable(false);
-                    console.log(response);
-                    console.log(response.data);
-                    console.log(response.status);
-                    if (response.data === 1) {
-                        alert('User Regiter Successfully');
+                console.log('User Register Data = ' + JSON.stringify(formData))
+                const url = Constants.BASE_URL + 'api/user/register';
+                const result = await registerApiCall.postApi('post', url, formData)
+                console.log("final result" + result)
+                if (result === '' || undefined) {
+                    removeLoader()
+                    alert("Sorry user not register please try again!")
+                }
+                else {
+                    if (result === 1) {
+                        alert("User Register Successfully")
+                        navigation.goBack();
                     }
-                    else if (response.data === 2) {
-                        alert('Email Already exist');
+                    else if (result === 2) {
+                        alert("User Already Exist")
+                        navigation.goBack();
                     }
-                }).catch(function (response) {
-                    //handle error
-                    setDisable(false);
-                    console.log(response);
-                    //alert('please check your internet connection and try again')
-                }); */
+                }
+
             }
             else {
                 alert('Both Password not matched')
             }
         }
+    }
+    const removeLoader = () => {
+        console.log("removeLoader called...")
+        seIsLoading(false)
+        setDisable(false)
     }
     const NameTextChange = (val) => {
         if (val.length == 0) {
@@ -258,13 +254,24 @@ export default function RegisterScreen({ navigation }) {
                         onChangeText={(val) => CpassTextChange(val)} />
                     {data.isValidCpass ? null : <Text style={{ color: '#FF0000' }}>Pass must be required</Text>}
                 </View>
+                <View style={{ marginTop: 24 }}>
+                    {
+                        isLoading ? (
+                            <ActivityIndicator size='large' color={Constants.Colors.PRIMARY}></ActivityIndicator>
+                        )
+                            :
+                            null
+                    }
+
+                </View>
                 <View style={styles.container3}>
-                    <SimpleCard style={styles.signUpButtonStyle} title={"Sign Up"} customClick={registerUser} />
+                    <SimpleCard style={styles.signUpButtonStyle} title={"Sign Up"} customClick={registerUser} gone={isDisable} />
                     <View style={styles.alreadyHaveAccountView}>
                         <Text style={styles.alreadyHaveAccountTextStyle}>Already have an Account ? </Text>
                         <Text style={styles.signInTextStyle} onPress={() => navigation.navigate(Constants.NavigationItems.AuthScreen)}>Sign In</Text>
                     </View>
                 </View>
+
             </ScrollView>
         </SafeAreaView>
     );

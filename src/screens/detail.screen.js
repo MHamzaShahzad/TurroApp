@@ -12,7 +12,7 @@ import FlatListSlider from '../components/imageSlider/flatlist.imageslider.compo
 import SimpleCard from '../components/cards/simple.card.component';
 import styles from '../styles';
 import Constants from '../utils/constants';
-
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 export default function DescriptionScreen({ props, navigation }) {
     const [data, setData] = useState([
         {
@@ -50,6 +50,18 @@ export default function DescriptionScreen({ props, navigation }) {
                 'Sample Description below the image for representation purpose only',
         },
     ]);
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <View style={{ flexDirection: 'row' }}>
+                    <MaterialIcons name="add-ic-call" style={{ marginRight: 20 }} size={26} color={Constants.Colors.WHITE} onPress={() => navigation.navigate(Constants.NavigationItems.FilterSawariScreen)} />
+                    <MaterialIcons name="sms" style={{ marginRight: 16 }} size={26} color={Constants.Colors.WHITE} onPress={() => navigation.navigate(Constants.NavigationItems.FilterSawariScreen)} />
+                </View>
+
+            ),
+        });
+    }, [navigation]);
+
     // const screenWidth = Math.round(Dimensions.get('window').width);
     return (
         <>
@@ -127,17 +139,18 @@ export default function DescriptionScreen({ props, navigation }) {
                         </View>
                     </View>
                 </ScrollView>
+                {/* <View style={style.bottomTabs}>
+                    <TouchableOpacity style={{ flex: 0.5, justifyContent: 'center', alignItems: 'center', backgroundColor: Constants.Colors.WHITE }}>
+                        <Text>Make Call</Text>
+                    </TouchableOpacity>
+                    <View style={{ width: 1, height: "100%", backgroundColor: Constants.Colors.BLACK }}></View>
+                    <TouchableOpacity style={{ flex: 0.5, justifyContent: 'center', alignItems: 'center', backgroundColor: Constants.Colors.WHITE }}>
+                        <Text>Send SMS</Text>
+                    </TouchableOpacity>
+                </View> */}
                 <SimpleCard style={{}} title="Book Now" customClick={() => navigation.navigate(Constants.NavigationItems.BookSawariScreen)} />
             </SafeAreaView>
-            <View style={style.bottomTabs}>
-                <TouchableOpacity style={{ flex: 0.5, justifyContent: 'center', alignItems: 'center', backgroundColor: Constants.Colors.WHITE }}>
-                    <Text>Make Call</Text>
-                </TouchableOpacity>
-                <View style={{ width: 1, height: "100%", backgroundColor: Constants.Colors.BLACK }}></View>
-                <TouchableOpacity style={{ flex: 0.5, justifyContent: 'center', alignItems: 'center', backgroundColor: Constants.Colors.WHITE }}>
-                    <Text>Send SMS</Text>
-                </TouchableOpacity>
-            </View>
+
         </>
     )
 }

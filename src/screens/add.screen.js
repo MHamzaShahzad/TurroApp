@@ -27,12 +27,18 @@ export default function AddSawari({ props, navigation }) {
         }).then(image => {
             images = [];
             console.log(image)
-            for (i = 0; i < image.length; i++) {
-                images.push(image[i].path)//image[i].data=>base64 string
+            if (image.length < 6) {
+                for (i = 0; i < image.length; i++) {
+                    images.push(image[i].path)//image[i].data=>base64 string
+                }
+                console.log("Images array length = " + images.length)
+                console.log("Images array with path " + JSON.stringify(images))
+                setsImages(images)
             }
-            console.log("Images array length = " + images.length)
-            console.log("Images array with path " + JSON.stringify(images))
-            setsImages(images)
+            else {
+                alert("Only 5 images allow")
+            }
+
         });
     }
 
@@ -50,9 +56,9 @@ export default function AddSawari({ props, navigation }) {
                             </View>
                         </View>
                         :
-                        <View>
+                        <View style={{ flex: 1 }}>
                             <FlatList
-                                horizontal
+                                horizontal={true}
                                 showsHorizontalScrollIndicator={false}
                                 keyExtractor={(item, index) => index.toString()}
                                 style={{ marginTop: 10, marginBottom: 10 }}
@@ -62,7 +68,7 @@ export default function AddSawari({ props, navigation }) {
                                         <Image source={{ uri: item }} style={{ width: "100%", height: 150, borderRadius: 10, }} resizeMode={'cover'}></Image>
                                     </View>
                                 }
-                            />
+                            ></FlatList>
                         </View>
                     }
 
@@ -218,13 +224,13 @@ const style = StyleSheet.create({
         fontWeight: 'bold'
     },
     imgstyleview: {
-        flex:1,
+        flex: 1,
         height: 200,
         borderRadius: 8,
         borderWidth: 1,
         borderStyle: "dashed",
         borderRadius: 10,
-        margin:16,
+        margin: 16,
         borderColor: Constants.Colors.PRIMARY,
     }
     ,
@@ -234,7 +240,7 @@ const style = StyleSheet.create({
         textAlign: 'center',
         alignSelf: 'center',
         fontSize: 16,
-        marginTop:24,
+        marginTop: 24,
         backgroundColor: Constants.Colors.PRIMARY,
         color: "white",
         paddingTop: 7,

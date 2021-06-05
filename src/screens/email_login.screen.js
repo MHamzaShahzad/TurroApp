@@ -1,12 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TextInput, ScrollView } from 'react-native';
-
+import { StyleSheet, Text, View, Image, TextInput, ScrollView, ActivityIndicator } from 'react-native';
 import app from '../assets/app_icon.png';
 import Constants from '../utils/constants';
 import SimpleCard from '../components/cards/simple.card.component';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
-var myData;
+import loginApiCall from '../utils/api.utils';
+var u_json_data;
 export default function EmailLoginScreen({ navigation }) {
     const [isLoading, setLoading] = React.useState(false)
     const [data, setData] = React.useState({
@@ -16,7 +15,7 @@ export default function EmailLoginScreen({ navigation }) {
         isValidPass: true,
     });
     const [isDisable, setDisable] = React.useState(false);
-    const LoginUser = () => {
+    const LoginUser = async () => {
 
         if (data.uemail.length == 0) {
             setData({
@@ -38,44 +37,42 @@ export default function EmailLoginScreen({ navigation }) {
             setDisable(true)
             setLoading(true)
             console.log("All data valid")
-            // Make a request for a user with a given Email&Pass
-            /* const url = Constants.BASE_URL + 'api/user/login?email=' + data.uemail + '&password=' + data.upass + '&lat_long=' + lat_long;
-            console.log("login url = " + url);
-            axios.get(url)
-                .then(function (response) {
-                    // handle success
-                    setLoading(false)
-                    setDisable(false)
-                    console.log(response.data);
-                    if (response.data === 0) {
-                        alert('Invalid Credentials');
-                        setData({
-                            ...data,
-                            isLoading: false,
-                        });
-                    }
-                    else {
-                        myData = JSON.stringify(response.data);
-                        console.log("Response Data into object Form" + myData);
-                        try {
-                            console.log("save user data called...")
-                            AsyncStorage.setItem('userData', myData)
-                        } catch (e) {
-                            console.log("Error = " + e)
-                            // saving error
-                        }
-                    }
-                })
-                .catch(function (error) {
-                    // handle error
-                    setDisable(false)
-                    setLoading(false)
-                    alert('Please check your internet connection and try again')
-                    console.log(error);
-                }) */
+            const url = Constants.BASE_URL + 'api/user/login?email=' +
+                data.uemail + '&password=' + data.upass;
+            console.log("URL = " + url)
+            const result = await loginApiCall.getApi(url)
+            console.log("Login data  = " + JSON.stringify(result))
+            if (result === '' || undefined) {
+                removeLoader()
+                alert("Sorry not login try again!")
+            }
+            else if (result === 0) {
+                removeLoader()
+                alert("User not exist with this email account")
+            }
+            else if (result === 1) {
+                removeLoader()
+                alert("Incorrect password")
+            }
+            else {
+                u_json_data = JSON.stringify(result);
+                console.log("Response Data into object Form" + u_json_data);
+                try {
+                    console.log("save user data called...")
+                    AsyncStorage.setItem(Constants.USER_DATA, u_json_data)
+                } catch (e) {
+                    console.log("Error = " + e)
+                    // saving error
+                }
+                removeLoader()
+            }
         }
     }
-
+    const removeLoader = () => {
+        console.log("removeLoader called...")
+        setLoading(false)
+        setDisable(false)
+    }
     const EmailTextChange = (val) => {
         if (val.length == 0) {
             setData({
@@ -139,8 +136,18 @@ export default function EmailLoginScreen({ navigation }) {
                     {data.isValidPass ? null : <Text style={{ color: '#FF0000' }}>Password must be required</Text>}
                 </View>
                 <Text style={{ margin: 20, fontSize: 18 }}>Forget Password?</Text>
+                <View style={{ marginTop: 24 }}>
+                    {
+                        isLoading ? (
+                            <ActivityIndicator size='large' color={Constants.Colors.PRIMARY}></ActivityIndicator>
+                        )
+                            :
+                            null
+                    }
+
+                </View>
                 <View style={styles.container4}>
-                    <SimpleCard style={styles.signInButtonStyle} title={"Sign In"} customClick={LoginUser} />
+                    <SimpleCard style={styles.signInButtonStyle} title={"Sign In"} customClick={LoginUser} gone={isDisable} />
                     <View style={styles.doNotHaveAccountViewStyle}>
                         <Text style={styles.doNotHaveAccountTextStyle}>Don't have an Account ? </Text>
                         <Text style={styles.signUpTextStyle} onPress={() => navigation.navigate(Constants.NavigationItems.RegisterScreen)}>Sign Up</Text>

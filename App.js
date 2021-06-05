@@ -10,7 +10,7 @@ const App = () => {
   useEffect(() => {
     setTimeout(async () => {
       setLoading(false);
-    }, 5000)
+    }, 1000)
   })
 
   if (isLoading) return (<Screens.SplashScreen />)
