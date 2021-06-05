@@ -44,15 +44,12 @@ export default function EmailLoginScreen({ navigation }) {
             const result = await loginApiCall.getApi(url)
             console.log("Login data  = " + JSON.stringify(result))
             if (result === '' || undefined) {
-                removeLoader()
                 alert("Sorry not login try again!")
             }
             else if (result === 0) {
-                removeLoader()
                 alert("User not exist with this email account")
             }
             else if (result === 1) {
-                removeLoader()
                 alert("Incorrect password")
             }
             else {
@@ -68,8 +65,8 @@ export default function EmailLoginScreen({ navigation }) {
                 removeLoader()
                 navigation.dispatch(StackActions.popToTop());
                 navigation.replace(Constants.NavigationItems.SawariHomeScreen)
-
             }
+            removeLoader()
         }
     }
     const removeLoader = () => {

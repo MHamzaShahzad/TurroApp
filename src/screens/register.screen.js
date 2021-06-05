@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image, SafeAreaView, TextInput, ScrollView, Act
 import app from '../assets/app_icon.png';
 import Constants from '../utils/constants';
 import SimpleCard from '../components/cards/simple.card.component';
-import registerApiCall from '../utils/api.utils';
+import RegisterApiCall from '../utils/api.utils';
 export default function RegisterScreen({ navigation }) {
     const [isLoading, seIsLoading] = useState(false);
     const [isDisable, setDisable] = React.useState(false);
@@ -65,7 +65,7 @@ export default function RegisterScreen({ navigation }) {
                 formData.append('password', data.upass);
                 console.log('User Register Data = ' + JSON.stringify(formData))
                 const url = Constants.BASE_URL + 'api/user/register';
-                const result = await registerApiCall.postApi('post', url, formData)
+                const result = await RegisterApiCall.postApi('post', url, formData)
                 console.log("final result" + result)
                 if (result === '' || undefined) {
                     removeLoader()

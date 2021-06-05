@@ -50,9 +50,7 @@ export default function AddSawari({ props, navigation }) {
                         <View >
                             <View style={style.imgstyleview}>
                                 <Text style={style.usephoto}>Upload Photo</Text>
-                                <TouchableOpacity onPress={() => pickImages("pick image")}>
-                                    <Text style={style.libraryphoto}>Choose From Library</Text>
-                                </TouchableOpacity>
+                                <SimpleCard style={{width: 180, alignSelf: 'center', margin: 20}} title="Choose From Library" customClick={() => pickImages("pick image")}/>
                             </View>
                         </View>
                         :
@@ -71,7 +69,6 @@ export default function AddSawari({ props, navigation }) {
                             ></FlatList>
                         </View>
                     }
-
                     <View style={style.outerTextViewNoBg}>
                         <View style={style.innerTextView}>
                             <Text style={style.textStyleTitle}>Car Make</Text>
@@ -162,7 +159,7 @@ export default function AddSawari({ props, navigation }) {
                     </View>
                 </ScrollView>
             </SafeAreaView>
-            <SimpleCard style={{ alignSelf: 'center', width: '40%', margin: 20 }} title="Submit" />
+            <SimpleCard style={{ alignSelf: 'center', width: '40%', marginBottom: 20 }} title="Submit" />
         </>
     );
 }
@@ -245,5 +242,6 @@ const style = StyleSheet.create({
         color: "white",
         paddingTop: 7,
         borderRadius: 60,
+
     },
 });
