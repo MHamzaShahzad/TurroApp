@@ -5,7 +5,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import HomeCard from '../components/cards/home.card.component';
 import Header from '../components/appbar.component'
 import Constants from '../utils/constants';
-
+import UserCache from '../utils/cache.utils';
 export default function MySawariListScreen({ props, navigation }) {
     const [sawariList, setSawariList] = useState(
         [{ key: 'One' },
@@ -33,8 +33,17 @@ export default function MySawariListScreen({ props, navigation }) {
         // Alert.alert(item);
         console.log(item)
     }
-
-    const addSawariComponent = <TouchableOpacity style={{ marginRight: 10, alignSelf: 'flex-end' }} onPress={() => navigation.navigate(Constants.NavigationItems.AddSawariScreen)}>
+    const getUserData = async () => {
+        const u_data = await UserCache.UserData(Constants.USER_DATA);
+        if (u_data != null) {
+            navigation.navigate(Constants.NavigationItems.AddSawariScreen)
+        }
+        else {
+            alert("please first login with your account")
+        }
+        console.log(u_data)
+    }
+    const addSawariComponent = <TouchableOpacity style={{ marginRight: 10, alignSelf: 'flex-end' }} onPress={() => getUserData()}>
         <MaterialCommunityIcons name="plus-thick" size={26} color={Constants.Colors.WHITE} />
     </TouchableOpacity>
 

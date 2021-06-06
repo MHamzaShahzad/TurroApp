@@ -62,7 +62,6 @@ export default function EmailLoginScreen({ navigation }) {
                     console.log("Error = " + e)
                     // saving error
                 }
-                removeLoader()
                 navigation.dispatch(StackActions.popToTop());
                 navigation.replace(Constants.NavigationItems.SawariHomeScreen)
             }
