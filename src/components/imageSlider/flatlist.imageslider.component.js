@@ -80,7 +80,6 @@ export default class FlatListSlider extends Component {
             React.cloneElement(this.props.component, {
               style: {width: this.props.width},
               item: item,
-              key: index,
               imageKey: this.props.imageKey,
               onPress: this.props.onPress,
               index: this.state.index % this.props.data.length,

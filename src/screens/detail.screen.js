@@ -1,19 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     ScrollView,
     Text,
     View,
     StyleSheet,
     SafeAreaView,
-    TouchableOpacity
+    TouchableOpacity,
 } from 'react-native';
+
 import Styles from '../styles';
 import FlatListSlider from '../components/imageSlider/flatlist.imageslider.component';
 import SimpleCard from '../components/cards/simple.card.component';
 import styles from '../styles';
 import Constants from '../utils/constants';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-export default function DescriptionScreen({ props, navigation }) {
+import APIUtils from '../utils/api.utils';
+import { openSMSApp, openCallDialer } from '../utils/common.utils'
+
+export default function DescriptionScreen({ route, navigation }) {
+    const { sawari } = route.params
+    const [renterProfile, setRenterProfile] = useState({});
+
     const [data, setData] = useState([
         {
             key: 0,
@@ -50,14 +57,23 @@ export default function DescriptionScreen({ props, navigation }) {
                 'Sample Description below the image for representation purpose only',
         },
     ]);
+
+    useEffect(() => {
+        APIUtils.getApi(Constants.BASE_URL + 'api/user_list?id=' + sawari.fk_user_id)
+            .then(data => {
+                console.log("defaultApp -> data", JSON.stringify(data))
+                setRenterProfile(data)
+            })
+            .catch((error) => console.error(error))
+    }, []);
+
     React.useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
                 <View style={{ flexDirection: 'row' }}>
-                    <MaterialIcons name="add-ic-call" style={{ marginRight: 20 }} size={26} color={Constants.Colors.WHITE} onPress={() => navigation.navigate(Constants.NavigationItems.FilterSawariScreen)} />
-                    <MaterialIcons name="sms" style={{ marginRight: 16 }} size={26} color={Constants.Colors.WHITE} onPress={() => navigation.navigate(Constants.NavigationItems.FilterSawariScreen)} />
+                    <MaterialIcons name="add-ic-call" style={{ marginRight: 20 }} size={26} color={Constants.Colors.WHITE} onPress={() => openCallDialer(renterProfile.contact)} />
+                    <MaterialIcons name="sms" style={{ marginRight: 16 }} size={26} color={Constants.Colors.WHITE} onPress={() => openSMSApp(renterProfile.contact, `Hi ${renterProfile.name} I want to inquire about your ${sawari.make ?? sawari.name} ${sawari.model} for rent`)} />
                 </View>
-
             ),
         });
     }, [navigation]);
@@ -80,62 +96,117 @@ export default function DescriptionScreen({ props, navigation }) {
                     <View style={{ padding: 10 }}>
                         <View style={style.outerTextViewNoBg}>
                             <View style={style.innerTextView}>
-                                <Text style={style.textStyleHeading}>Toyota Corola</Text>
+                                <Text style={style.textStyleHeading}>{sawari.make ?? sawari.name} {sawari.model}</Text>
                             </View>
                             <View style={style.innerTextView}>
-                                <Text style={style.textStyleHeading}>10000/Day</Text>
+                                <Text style={style.textStyleHeading}>{sawari.car_rent}</Text>
                             </View>
                         </View>
                         <View style={style.outerTextViewNoBg}>
-                            <SimpleCard title="5" image='car' icon_color={Constants.Colors.WHITE} />
-                            <SimpleCard title="Petrol" image='car' icon_color={Constants.Colors.WHITE} />
-                            <SimpleCard title="Sedan" image='car' icon_color={Constants.Colors.WHITE} />
-                            <SimpleCard title="Local" image='car' icon_color={Constants.Colors.WHITE} />
-                            <SimpleCard title="Exp" image='car' icon_color={Constants.Colors.WHITE} />
+                            <SimpleCard title={sawari.sitting_capacity} image='car' icon_color={Constants.Colors.WHITE} />
+                            <SimpleCard title={
+                                {
+                                    1: 'Petrol',
+                                    2: 'Diesel',
+                                    3: 'Hybrid',
+                                    null: '-'
+                                }[sawari.engine_type]
+                            } image='car' icon_color={Constants.Colors.WHITE} />
+                            <SimpleCard title={sawari.car_type ?? '-'} image='car' icon_color={Constants.Colors.WHITE} />
+                            <SimpleCard title={
+                                {
+                                    1: 'Imported',
+                                    2: 'Local',
+                                    3: 'Sports',
+                                    4: 'Popular',
+                                    null: '-'
+                                }[sawari.assembly]
+                            } image='car' icon_color={Constants.Colors.WHITE} />
                         </View>
                         <View style={style.outerTextView}>
                             <View style={style.innerTextView}>
-                                <Text style={style.textStyleTitle}>Hello</Text>
-                                <Text style={style.textStyle}>Hello</Text>
+                                <Text style={style.textStyleTitle}>Model Year</Text>
+                                <Text style={style.textStyle}>{sawari.model_year}</Text>
                             </View>
                             <View style={style.innerTextView}>
-                                <Text style={style.textStyleTitle}>World</Text>
-                                <Text style={style.textStyle}>World</Text>
+                                <Text style={style.textStyleTitle}>Sawari Variant</Text>
+                                <Text style={style.textStyle}>{sawari.variant}</Text>
                             </View>
                         </View>
                         <View style={style.outerTextViewNoBg}>
                             <View style={style.innerTextView}>
-                                <Text style={style.textStyleTitle}>Hello</Text>
-                                <Text style={style.textStyle}>Hello</Text>
+                                <Text style={style.textStyleTitle}>Sawari Transmission</Text>
+                                <Text style={style.textStyle}>
+                                    {
+                                        {
+                                            1: 'Manual',
+                                            2: 'Automatic',
+                                            null: '-'
+                                        }[sawari.car_tranmission]
+                                    }
+                                </Text>
                             </View>
                             <View style={style.innerTextView}>
-                                <Text style={style.textStyleTitle}>World</Text>
-                                <Text style={style.textStyle}>World</Text>
+                                <Text style={style.textStyleTitle}>Engine Capacity</Text>
+                                <Text style={style.textStyle}>{sawari.engine_capacity}</Text>
                             </View>
                         </View>
                         <View style={style.outerTextView}>
                             <View style={style.innerTextView}>
-                                <Text style={style.textStyleTitle}>Hello</Text>
-                                <Text style={style.textStyle}>Hello</Text>
+                                <Text style={style.textStyleTitle}>Body Color</Text>
+                                <Text style={style.textStyle}>{sawari.color}</Text>
                             </View>
                             <View style={style.innerTextView}>
-                                <Text style={style.textStyleTitle}>World</Text>
-                                <Text style={style.textStyle}>World</Text>
+                                <Text style={style.textStyleTitle}>Sawari Mileage</Text>
+                                <Text style={style.textStyle}>{sawari.car_mileage}</Text>
                             </View>
                         </View>
                         <View style={style.outerTextViewNoBg}>
                             <View style={style.innerTextView}>
-                                <Text style={style.textStyleTitle}>Hello</Text>
-                                <Text style={style.textStyle}>Hello</Text>
+                                <Text style={style.textStyleTitle}>Registration City</Text>
+                                <Text style={style.textStyle}>{sawari.registration_city}</Text>
                             </View>
                             <View style={style.innerTextView}>
-                                <Text style={style.textStyleTitle}>World</Text>
-                                <Text style={style.textStyle}>World</Text>
+                                <Text style={style.textStyleTitle}>Pickup City</Text>
+                                <Text style={style.textStyle}>{sawari.pickup_city}</Text>
+                            </View>
+                        </View>
+                        <View style={style.outerTextView}>
+                            <View style={style.innerTextView}>
+                                <Text style={style.textStyleTitle}>Renter's Name</Text>
+                                <Text style={style.textStyle}>{renterProfile.name}</Text>
+                            </View>
+                            <View style={style.innerTextView}>
+                                <Text style={style.textStyleTitle}>Between Cities</Text>
+                                <Text style={style.textStyle}>
+                                    {
+                                        {
+                                            0: 'Yes',
+                                            1: 'No',
+                                            null: '-'
+                                        }[sawari.btw_city]
+                                    }
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={style.outerTextViewNoBg}>
+                            <View style={style.innerTextView}>
+                                <Text style={style.textStyleTitle}>Driver Availibility</Text>
+                                <Text style={style.textStyle}>
+                                    {
+                                        {
+                                            1: 'Only With Driver',
+                                            2: 'Driver Available On Demand',
+                                            3: 'Without Driver',
+                                            null: '-'
+                                        }[sawari.driver_availability]
+                                    }
+                                </Text>
                             </View>
                         </View>
                         <View>
                             <Text style={style.textStyleTitle}>Description</Text>
-                            <Text style={style.textStyle}>lorem ipsum doller lorem ipsum doller lorem ipsum doller lorem ipsum doller lorem ipsum doller lorem ipsum doller lorem ipsum doller lorem ipsum doller lorem ipsum doller lorem ipsum doller lorem ipsum doller lorem ipsum doller lorem ipsum doller</Text>
+                            <Text style={style.textStyle}>{sawari.description}</Text>
                         </View>
                     </View>
                 </ScrollView>
@@ -149,7 +220,7 @@ export default function DescriptionScreen({ props, navigation }) {
                     </TouchableOpacity>
                 </View> */}
             </SafeAreaView>
-            <SimpleCard style={{marginBottom: 20, width: '40%', alignSelf: 'center'}} title="Book Now" customClick={() => navigation.navigate(Constants.NavigationItems.BookSawariScreen)} />
+            <SimpleCard style={{ marginBottom: 20, width: '40%', alignSelf: 'center' }} title="Book Now" customClick={() => navigation.navigate(Constants.NavigationItems.BookSawariScreen)} />
         </>
     )
 }

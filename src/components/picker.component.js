@@ -10,7 +10,9 @@ const DropDownPicker = (props) => {
     const noop = (value) => {
         console.log(value)
         setSValue(value)
+        props.onValueChange(value)
     };
+
     return (
         <View style={styles.layout} >
             <RNPickerSelect

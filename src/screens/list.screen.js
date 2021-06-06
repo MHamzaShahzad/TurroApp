@@ -5,54 +5,35 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import HomeCard from '../components/cards/home.card.component';
 import Constants from '../utils/constants';
 
-export default function ItemsScreen({ props, navigation }) {
-    const [sawariList, setSawariList] = useState(
-        [{ key: 'One' },
-        { key: 'Two' },
-        { key: 'Three' },
-        { key: 'Four' },
-        { key: 'Five' },
-        { key: 'Six' },
-        { key: 'Seven' },
-        { key: 'Eight' },
-        { key: 'Nine' },
-        { key: 'Ten' },
-        { key: 'Eleven' },
-        { key: 'Twelve' },
-        { key: 'Thirteen' },
-        { key: 'Fourteen' },
-        { key: 'Fifteen' },
-        { key: 'Sixteen' },
-        { key: 'Seventeen' },
-        { key: 'Eighteen' },
-        { key: 'Nineteen' },
-        { key: 'Twenty' }]);
+export default function ItemsScreen({ route, navigation }) {
 
-    const GetGridViewItem = (item) => {
-        // Alert.alert(item);
-        console.log(item)
+    const { sawariList } = route.params;
+
+    const viewDetails = (sawari) => {
+        navigation.navigate(Constants.NavigationItems.SawariDetailsScreen, {sawari})
     }
 
     React.useLayoutEffect(() => {
         navigation.setOptions({
-          headerRight: () => (
-            <MaterialIcons name="search" style={{marginRight: 10}} size={26} color={Constants.Colors.WHITE} onPress={() => navigation.navigate(Constants.NavigationItems.FilterSawariScreen)} />
-          ),
+            headerRight: () => (
+                <MaterialIcons name="search" style={{ marginRight: 10 }} size={26} color={Constants.Colors.WHITE} onPress={() => navigation.navigate(Constants.NavigationItems.FilterSawariScreen)} />
+            ),
         });
-      }, [navigation]);
+    }, [navigation]);
 
     return (
         <>
             <SafeAreaView style={{ flex: 1 }}>
                 <FlatList
+                    showsVerticalScrollIndicator={false}
                     data={sawariList}
+                    keyExtractor={({ id }, index) => index.toString()}
                     renderItem={({ item }) =>
-                        <View style={styles.GridViewBlockStyle}>
-                            <HomeCard style={{ height: 200, width: '100%' }} title="DATA" customClick={() => navigation.navigate(Constants.NavigationItems.SawariDetailsScreen)} />
+                        <View style={styles.GridViewBlockStyle} key={item.id}>
+                            <HomeCard style={{ height: 200, width: '100%' }} item={item} customClick={() => viewDetails(item)} />
                         </View>
                     }
                     numColumns={2}
-                    showsVerticalScrollIndicator={false}
                 />
             </SafeAreaView>
         </>
