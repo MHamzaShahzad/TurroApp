@@ -220,7 +220,7 @@ export default function DescriptionScreen({ route, navigation }) {
                     </TouchableOpacity>
                 </View> */}
             </SafeAreaView>
-            <SimpleCard style={{ marginBottom: 20, width: '40%', alignSelf: 'center' }} title="Book Now" customClick={() => navigation.navigate(Constants.NavigationItems.BookSawariScreen)} />
+            <SimpleCard style={{ marginBottom: 20, width: '40%', alignSelf: 'center' }} title="Book Now" customClick={() => navigation.navigate(Constants.NavigationItems.BookSawariScreen, {sawari: sawari})} />
         </>
     )
 }

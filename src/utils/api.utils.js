@@ -10,7 +10,7 @@ const postApi = async (method, url, formData) => {
         return Promise.resolve(response.data)
 
     }).catch(error => {
-        console.log("error called");
+        console.log("error called: " + error);
         return Promise.reject(error)
     });
 }
