@@ -103,7 +103,7 @@ export default function DescriptionScreen({ route, navigation }) {
                             </View>
                         </View>
                         <View style={style.outerTextViewNoBg}>
-                            <SimpleCard title={sawari.sitting_capacity} image='car' icon_color={Constants.Colors.WHITE} />
+                            <SimpleCard title={sawari.sitting_capacity} image='car-seat' icon_color={Constants.Colors.WHITE} />
                             <SimpleCard title={
                                 {
                                     1: 'Petrol',
@@ -111,7 +111,7 @@ export default function DescriptionScreen({ route, navigation }) {
                                     3: 'Hybrid',
                                     null: '-'
                                 }[sawari.engine_type]
-                            } image='car' icon_color={Constants.Colors.WHITE} />
+                            } image='engine' icon_color={Constants.Colors.WHITE} />
                             <SimpleCard title={sawari.car_type ?? '-'} image='car' icon_color={Constants.Colors.WHITE} />
                             <SimpleCard title={
                                 {

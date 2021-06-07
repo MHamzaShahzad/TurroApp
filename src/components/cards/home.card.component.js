@@ -7,12 +7,12 @@ const HomeCard = (props) => {
         <TouchableOpacity style={[styles.layout, { width: props.style?.width, height: props.style?.height }]} onPress={props.customClick}>
             <Image style={styles.image} source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWOtpaoxvucsi4fj6-NBd08-FKGm_yJKrnctIOuMBh-BgWELKGnBcIEaaXF1OPnTZdXWM&usqp=CAU" }} resizeMode={'cover'} />
             <View style={styles.textView}>
-                <Text style={styles.text}>{props.item.make} {props.item.model}</Text>
-                <Text style={[styles.text, { textAlign: 'right' }]}>{props.item.variant}</Text>
+                <Text style={styles.text}>{props.item?.make ?? props.item?.name} {props.item?.model}</Text>
+                <Text style={[styles.text, { textAlign: 'right' }]}>{props.item?.variant}</Text>
             </View>
             <View style={styles.textView}>
-                <Text style={styles.text}>{props.item.registration_city}</Text>
-                <Text style={[styles.text, { textAlign: 'right' }]}>{props.item.car_rent}</Text>
+                <Text style={styles.text}>{props.item?.registration_city}</Text>
+                <Text style={[styles.text, { textAlign: 'right' }]}>{props.item?.car_rent}</Text>
             </View>
         </TouchableOpacity>
     );
