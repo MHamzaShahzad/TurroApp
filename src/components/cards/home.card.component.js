@@ -12,7 +12,7 @@ const HomeCard = (props) => {
             </View>
             <View style={styles.textView}>
                 <Text style={styles.text}>{props.item?.registration_city}</Text>
-                <Text style={[styles.text, { textAlign: 'right' }]}>{props.item?.car_rent}</Text>
+                <Text style={[styles.text, { textAlign: 'right', fontStyle: 'italic' }]}>{props.item?.car_rent}</Text>
             </View>
         </TouchableOpacity>
     );

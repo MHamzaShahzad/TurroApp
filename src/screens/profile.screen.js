@@ -1,14 +1,58 @@
-import React from 'react';
-import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, Text, TextInput, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import FontistoIcons from 'react-native-vector-icons/Fontisto'
-import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome'
-import AntDesignIcons from 'react-native-vector-icons/AntDesign'
+import FontistoIcons from 'react-native-vector-icons/Fontisto';
+import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
+import AntDesignIcons from 'react-native-vector-icons/AntDesign';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Constants from '../utils/constants';
 import SimpleCard from '../components/cards/simple.card.component';
+import UserCache from '../utils/cache.utils';
 
 export default function Profile({ props, navigation }) {
+    const [userProfile, setUserProfile] = useState({});
+    useEffect(() => {
+        UserCache.UserData(Constants.USER_DATA)
+            .then( data  => {
+                console.log("defaultApp -> data", JSON.stringify(data))
+                setUserProfile(data)
+            })
+            .catch((error) => console.error(error))
+    }, {});
+
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <MaterialCommunityIcons name="logout" style={{ marginRight: 10 }} size={26} color={Constants.Colors.WHITE} onPress={logout} />
+            ),
+        });
+    }, [navigation]);
+    
+    const logout = () => {
+        Alert.alert(
+          'Confirm',
+          'Do you want to logout of your account ?',
+          [
+            {
+              text: 'Ok',
+              onPress: async () => {
+                try {
+                  await AsyncStorage.removeItem(Constants.USER_DATA)
+                  navigation.goBack()
+                } catch (e) {
+                  console.log(e);
+                }
+              },
+            },
+            {
+              text: 'Cancel',
+            }
+          ],
+          { cancelable: false }
+        );
+      }
+
     return (
         <View style={styles.container}>
             <View style={styles.imageViewContainer}>
@@ -19,15 +63,15 @@ export default function Profile({ props, navigation }) {
             <ScrollView style={{ marginTop: 50 }}>
                 <View style={styles.inputFiledLayout}>
                     <FontAwesomeIcons name={'user-o'} color={Constants.Colors.PRIMARY} size={22} />
-                    <TextInput style={styles.inputFieldText} placeholder=" Enter Name " />
+                    <TextInput style={styles.inputFieldText} value={userProfile?.name} placeholder=" Enter Name " />
                 </View>
                 <View style={styles.inputFiledLayout}>
                     <FontistoIcons name={'email'} color={Constants.Colors.PRIMARY} size={22} />
-                    <TextInput style={styles.inputFieldText} placeholder=" Enter E-mail " />
+                    <TextInput style={styles.inputFieldText} value={userProfile?.email} placeholder=" Enter E-mail " />
                 </View>
                 <View style={styles.inputFiledLayout}>
                     <FontAwesomeIcons name={'mobile'} color={Constants.Colors.PRIMARY} size={22} />
-                    <TextInput style={styles.inputFieldText} placeholder=" Enter Phone Number " />
+                    <TextInput style={styles.inputFieldText} value={userProfile?.contact} placeholder=" Enter Phone Number " />
                 </View>
                 <View style={styles.inputFiledLayout}>
                     <AntDesignIcons name={'idcard'} color={Constants.Colors.PRIMARY} size={22} />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Image, StyleSheet, Switch, Text, View, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Alert, Text, View, TouchableOpacity } from 'react-native';
 import 'react-native-gesture-handler';
 import logod from '../assets/app_icon.png';
 import login from '../assets/login.png';
@@ -13,37 +13,31 @@ import UserCache from '../utils/cache.utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 var u_data;
 export default function DrawerContent({ props, navigation }) {
+
   const [userName, setUserName] = useState('')
+
   useEffect(() => {
     console.log("Drawer content called..")
     getUserData()
   }, [])
+
   const getUserData = async () => {
     u_data = await UserCache.UserData(Constants.USER_DATA);
     if (u_data != null) {
       setUserName(u_data.name)
-    }
-    else {
+    } else {
       setUserName('')
     }
     console.log(u_data)
   }
+
   const drawerNavigationItemClick = (navigateTo) => {
     navigation.closeDrawer();
     navigation.navigate(navigateTo);
   }
-  const logout = async () => {
-    try {
-      await AsyncStorage.removeItem(Constants.USER_DATA)
-      getUserData()
-    } catch (e) {
-      // saving error
-      console.log(e);
-    }
-  }
+
   return (
     <View style={styles.container}>
-
       <View style={styles.headerContainer}>
         <Image source={logod} style={styles.headerImage} resizeMode='contain' />
         <Text style={styles.textStyleHeader}>Turro</Text>
@@ -58,7 +52,7 @@ export default function DrawerContent({ props, navigation }) {
         :
         <View style={styles.navItemContainer}>
           <Image source={man} style={styles.navItemIconStyle} resizeMode='contain' />
-          <TouchableOpacity onPress={() => logout()}>
+          <TouchableOpacity onPress={() => drawerNavigationItemClick(Constants.NavigationItems.ProfileScreen)}>
             <Text style={styles.navItemTextStyle}>{userName}</Text>
           </TouchableOpacity>
         </View>

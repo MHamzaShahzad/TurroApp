@@ -12,4 +12,5 @@ const UserData = async (key) => {
 
     }
 }
+
 export default { UserData }

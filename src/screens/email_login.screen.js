@@ -43,6 +43,7 @@ export default function EmailLoginScreen({ navigation }) {
             console.log("URL = " + url)
             const result = await loginApiCall.getApi(url)
             console.log("Login data  = " + JSON.stringify(result))
+            removeLoader()
             if (result === '' || undefined) {
                 alert("Sorry not login try again!")
             }
@@ -65,7 +66,6 @@ export default function EmailLoginScreen({ navigation }) {
                 navigation.dispatch(StackActions.popToTop());
                 navigation.replace(Constants.NavigationItems.SawariHomeScreen)
             }
-            removeLoader()
         }
     }
     const removeLoader = () => {
