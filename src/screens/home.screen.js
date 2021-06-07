@@ -12,20 +12,14 @@ export default function HomeScreen({ props, navigation }) {
 
     const [isLoading, setLoading] = useState(true);
     const [sawariList, setSawariList] = useState([]);
-
-    const [sawarCategories, setSawariCategories] = useState(
-        [{ key: 'Local' },
-        { key: 'Imported' },
-        { key: 'Popular' },
-        { key: 'Sports Car' }]
-    );
+    const [sawarCategoryWiseList, setSawariCategoryWiseList] = useState([]);
 
     const viewDetails = (sawari) => {
-        navigation.navigate(Constants.NavigationItems.SawariDetailsScreen, {sawari})
+        navigation.navigate(Constants.NavigationItems.SawariDetailsScreen, { sawari })
     }
 
     const viewAll = (list) => {
-        navigation.navigate(Constants.NavigationItems.SawariListScreen, {sawariList: list})
+        navigation.navigate(Constants.NavigationItems.SawariListScreen, { sawariList: list })
     }
     const applyFilter = (category) => {
         navigation.navigate(Constants.NavigationItems.FilterSawariScreen)
@@ -34,12 +28,18 @@ export default function HomeScreen({ props, navigation }) {
     useEffect(() => {
         setLoading(true)
         APIUtils.getApi(Constants.BASE_URL + 'api/car_list')
-            .then( data  => {
+            .then(data => {
                 console.log("defaultApp -> data", JSON.stringify(data))
                 setSawariList(data)
+                let lists = [];
+                for (let i = 1; i <= 4; i++)
+                    lists.push(data.filter(function (item) { return item.assembly == i }))
+                setSawariCategoryWiseList(lists)
             })
             .catch((error) => console.error(error))
-            .finally(() => setLoading(false))
+            .finally(() => {
+                setLoading(false)
+            })
     }, []);
 
     return (
@@ -61,26 +61,40 @@ export default function HomeScreen({ props, navigation }) {
                         numColumns={2}
                     /> */}
                     {
-                        isLoading == true ? ( <ActivityIndicator /> ) : (
+                        isLoading == true ? (<ActivityIndicator />) : (
                             <>
-                                <View style={{ padding: 10, flex: 1, backgroundColor: '#cacaca', flexDirection: 'row' }}>
-                                    <Text style={{ flex: 0.5 }}>Imported</Text>
-                                    <TouchableOpacity onPress={() => viewAll(sawariList )} style={{ flex: 0.5, alignItems: 'flex-end' }}>
-                                        <Text>View All</Text>
-                                    </TouchableOpacity>
-                                </View>
-                                <FlatList
-                                    horizontal
-                                    showsHorizontalScrollIndicator={false}
-                                    style={{ marginTop: 10, marginBottom: 10 }}
-                                    data={sawariList}
-                                    keyExtractor={( {id}, index) => index.toString()}
-                                    renderItem={({ item }) => 
-                                        <View style={styles.GridViewBlockStyle} key={item.id}>
-                                            <HomeCard style={{ height: 200, width: 150 }} item={item} customClick={() => viewDetails(item)} />
-                                        </View>
-                                    }
-                                />
+                                {
+                                    sawarCategoryWiseList.map((list, index) =>
+                                        list.length > 0 ? <View key={index}>
+                                            <View style={{ padding: 10, flex: 1, backgroundColor: '#cacaca', flexDirection: 'row' }}>
+                                                <Text style={{ flex: 0.5 }}>{
+                                                    {
+                                                        1: 'Imported',
+                                                        2: 'Local',
+                                                        3: 'Sports',
+                                                        4: 'Popular',
+                                                        null: '-'
+                                                    }[list[0].assembly]
+                                                }</Text>
+                                                <View style={{ flex: 0.5, alignItems: 'flex-end' }}>
+                                                    <Text onPress={() => viewAll(list)}>View All</Text>
+                                                </View>
+                                            </View>
+                                            <FlatList
+                                                horizontal
+                                                showsHorizontalScrollIndicator={false}
+                                                style={{ marginTop: 10, marginBottom: 10 }}
+                                                data={list}
+                                                keyExtractor={({ id }, index) => index.toString()}
+                                                renderItem={({ item }) =>
+                                                    <View style={styles.GridViewBlockStyle} key={item.id}>
+                                                        <HomeCard style={{ height: 200, width: 150 }} item={item} customClick={() => viewDetails(item)} />
+                                                    </View>
+                                                }
+                                            />
+                                        </View> : null
+                                    )
+                                }
                             </>)
                     }
                 </ScrollView>
