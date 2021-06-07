@@ -1,5 +1,5 @@
 export default {
-    BASE_URL: "http://22089e1af2f2.ngrok.io/",///Replace with live url before production  
+    BASE_URL: "http://ce4c6b8144a2.ngrok.io/",///Replace with live url before production  
     USER_DATA: 'userData',
     Colors: {
         PRIMARY: '#fa9b17',
@@ -27,5 +27,7 @@ export default {
         DrawerBottomTabs: "DrawerBottomTabs",
         MySawariListScreen: "MySawariListScreen",
         BookSawariScreen: "BookSawariScreen",
+        ResetPasswordScreen: "ResetPasswordScreen",
+        ForgetPasswordScreen:"ForgetPasswordScreen"
     }
 }

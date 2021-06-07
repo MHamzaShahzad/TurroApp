@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TextInput, ScrollView, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
 import app from '../assets/app_icon.png';
 import Constants from '../utils/constants';
 import SimpleCard from '../components/cards/simple.card.component';
@@ -135,7 +135,9 @@ export default function EmailLoginScreen({ navigation }) {
                         onChangeText={(val) => PassTextChange(val)} />
                     {data.isValidPass ? null : <Text style={{ color: '#FF0000' }}>Password must be required</Text>}
                 </View>
-                <Text style={{ margin: 20, fontSize: 18 }}>Forget Password?</Text>
+                <TouchableOpacity onPress={() => navigation.navigate("ForgetPasswordScreen")}>
+                    <Text style={{ margin: 20, fontSize: 18 }}>Forget Password?</Text>
+                </TouchableOpacity>
                 <View style={{ marginTop: 24 }}>
                     {
                         isLoading ? (

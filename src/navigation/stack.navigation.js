@@ -35,6 +35,10 @@ function MainStackNavigator() {
                 <Stack.Screen name={Constants.NavigationItems.ChooseItemScreen} component={Screens.ChooseItem} options={{ title: "Choose Item" }} />
                 <Stack.Screen name={Constants.NavigationItems.AdvanceFilterScreen} component={Screens.AdvanceFilterScreen} options={{ title: "Advacne Filter" }} />
                 <Stack.Screen name={Constants.NavigationItems.BookSawariScreen} component={Screens.BookSawariScreen} options={{ title: "Book Sawari" }} />
+                <Stack.Screen name={Constants.NavigationItems.ResetPasswordScreen} component={Screens.ResetPasswordScreen} options={{ title: "Reset Password" }} />
+                <Stack.Screen name={Constants.NavigationItems.ForgetPasswordScreen} component={Screens.ForgetPasswordScreen} options={{ title: "Forget Password" }} />
+
+
             </Stack.Navigator>
         </NavigationContainer>
     );
