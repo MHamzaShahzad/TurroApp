@@ -9,13 +9,21 @@ import APIUtils from '../utils/api.utils';
 import Mytextinput from '../components/textinput.component';
 import { useEffect } from 'react';
 import UserCache from '../utils/cache.utils';
+import TurroAPIUtils from '../models/turro.api.model';
+
 var images = [];
 export default function AddSawari({ props, navigation }) {
     const [userProfile, setUserProfile] = useState({});
     const [simages, setsImages] = useState([]);
-    const [carMake, setCarMake] = useState([]);
-    const [carModel, setCarModel] = useState([]);
+    const [sawariMakes, setSawariMakes] = useState([]);
+    const [sawariModels, setSawariModels] = useState([]);
     const [modelYears, setModelYears] = useState([]);
+    const [carTypes, setCarTypes] = useState([]);
+
+    const [apiLoader, setApiLoader] = useState(true);
+    const [modelLoader, setModelLoader] = useState(true);
+
+
     let services = [
         { label: 'Football', value: 'football' },
         { label: 'Baseball', value: 'baseball' },
@@ -53,7 +61,60 @@ export default function AddSawari({ props, navigation }) {
                 setUserProfile(data)
             })
             .catch((error) => console.error(error))
+        getDropDownData()
     }, [])
+    const getDropDownData = () => {
+        TurroAPIUtils.getMakes()
+            .then(data => {
+                console.log("Makes -> data", JSON.stringify(data))
+                const makes = data.map((item, index) => {
+                    return { label: item.name, value: item.id }
+                })
+                console.log("Sawari Makes -> data", JSON.stringify(makes))
+                setSawariMakes(makes)
+            })
+            .catch((error) => console.error(error))
+        TurroAPIUtils.getCarTypes()
+            .then(data => {
+                console.log("Car Types -> data", JSON.stringify(data))
+                const makes = data.map((item, index) => {
+                    return { label: item.name, value: item.name }
+                })
+                console.log("Sawari Car Types -> data", JSON.stringify(makes))
+                setCarTypes(makes)
+            })
+            .catch((error) => console.error(error))
+        TurroAPIUtils.getYears()
+            .then(data => {
+                console.log("Years -> data", JSON.stringify(data))
+                const makes = data.map((item, index) => {
+                    return { label: item.toString(), value: item }
+                })
+                console.log("Sawari Years -> data", JSON.stringify(makes))
+                setModelYears(makes)
+            })
+            .catch((error) => console.error(error))
+            .finally(() => setApiLoader(false))
+    }
+    const getModels = (value) => {
+        setModelLoader(true)
+        setData({
+            ...data,
+            make: value
+        })
+        TurroAPIUtils.getModels(value)
+            .then(data => {
+                console.log("Models -> data", JSON.stringify(data))
+                const models = data.map((item, index) => {
+                    return { label: item.model, value: item.id }
+                })
+                console.log("Sawari Models -> data", JSON.stringify(models))
+                setSawariModels(models)
+            })
+            .catch((error) => console.error(error))
+            .finally(() => setModelLoader(false))
+    }
+
     const placeholder = {
         label: 'Please select your car make',
         value: null,
@@ -92,109 +153,140 @@ export default function AddSawari({ props, navigation }) {
     const [isLoading, seIsLoading] = useState(false);
     const [isDisable, setDisable] = React.useState(false);
     const [data, setData] = React.useState({
-        make: 'Audi',
-        model: 'A3',
-        model_year: 2021,
-        variant: 'TFSI',
-        assembly: 1,
-        engine_capacity: 1200,
-        sitting_capacity: 5,
-        color: 'White',
-        engine_type: 1,
-        registration_city: 'FSD',
-        pickup_city: 'FSD',
+        make: '',
+        model: '',
+        model_year: '',
+        variant: '',
+        assembly: '',
+        engine_capacity: '',
+        sitting_capacity: '',
+        color: '',
+        engine_type: '',
+        registration_city: '',
+        pickup_city: '',
         car_mileage: '',
         car_rent: '',
         description: '',
-        driver_availability: 2,
-        btw_city: 1,
-        car_tranmission: 2,
-        car_type: 'Sedan',
+        driver_availability: '',
+        btw_city: '1',
+        car_tranmission: '',
+        car_type: '',
         image: []
     });
-    console.log("Add car data = " + JSON.stringify(data))
+    //console.log("Add car data = " + JSON.stringify(data))
     const rentMyCar = async () => {
         console.log("fk_user_id = " + userProfile.id)
         if (data.make.length == 0) {
             setData({
                 ...data
             });
+            alert("Car Make not Empty")
         } else if (data.model.length == 0) {
             setData({
                 ...data
             });
+            alert("Car model not Empty")
         }
         else if (data.model_year.length == 0) {
             setData({
                 ...data
             });
+            alert("Car Years not Empty")
         }
         else if (data.variant.length == 0) {
             setData({
                 ...data
             });
+            alert("Car Make not Empty")
         }
         else if (data.assembly.length == 0) {
             setData({
                 ...data
             });
+            alert("Car Assembly not Empty")
         }
-        else if (data.engine_capacity.length == 0) {
+        else if (data.car_tranmission.length == 0) {
             setData({
                 ...data
             });
+            alert("Car Transmission not Empty")
         }
-        else if (data.sitting_capacity.length == 0) {
+        else if (data.car_type.length == 0) {
             setData({
                 ...data
             });
-        }
-        else if (data.color.length == 0) {
-            setData({
-                ...data
-            });
+            alert("Car Type not Empty")
         }
         else if (data.engine_type.length == 0) {
             setData({
                 ...data
             });
+            alert("Car Engine Type not Empty")
         }
+        else if (data.engine_capacity.length == 0) {
+            setData({
+                ...data
+            });
+            alert("Car Engin Capacity not Empty")
+        }
+        else if (data.sitting_capacity.length == 0) {
+            setData({
+                ...data
+            });
+            alert("Car Sitting Capacity not Empty")
+        }
+        else if (data.color.length == 0) {
+            setData({
+                ...data
+            });
+            alert("Car Color not Empty")
+        }
+
         else if (data.registration_city.length == 0) {
             setData({
                 ...data
             });
+            alert("Car Registration not Empty")
         }
         else if (data.pickup_city.length == 0) {
             setData({
                 ...data
             });
-        }
-        else if (data.car_mileage.length == 0) {
-            setData({
-                ...data
-            });
-        }
-        else if (data.car_rent.length == 0) {
-            setData({
-                ...data
-            });
-        }
-        else if (data.description.length == 0) {
-            setData({
-                ...data
-            });
+            alert("Car PickUp not Empty")
         }
         else if (data.driver_availability.length == 0) {
             setData({
                 ...data
             });
+            alert("Driver Availability field not Empty")
         }
-        else if (data.btw_city.length == 0) {
+        else if (data.car_mileage.length == 0) {
             setData({
                 ...data
             });
+            alert("Car mileage not Empty")
         }
+        else if (data.car_rent.length == 0) {
+            setData({
+                ...data
+            });
+            alert("Car Rent not Empty")
+        }
+
+        /* 
+                else if (data.btw_city.length == 0) {
+                    setData({
+                        ...data
+                    });
+                    alert("Between City field not Empty")
+                } */
         else if (data.image.length == 0) {
+            setData({
+                ...data
+            });
+            alert("Image must be required")
+        }
+        else if (data.description.length == 0) {
             setData({
                 ...data
             });
@@ -203,9 +295,10 @@ export default function AddSawari({ props, navigation }) {
             seIsLoading(true)
             setDisable(true)
             const formData = new FormData();
-            formData.append('name', data.make);
-            formData.append('make', data.make);
-            formData.append('model', data.model);
+            formData.append('fk_user_id', userProfile.id);
+            //formData.append('name', data.make);
+            formData.append('fk_make_id', data.make);
+            formData.append('fk_model_id', data.model);
             formData.append('model_year', data.model_year);
             formData.append('variant', data.variant);
             formData.append('assembly', data.assembly);
@@ -222,8 +315,7 @@ export default function AddSawari({ props, navigation }) {
             formData.append('car_tranmission', data.car_tranmission);
             formData.append('car_type', data.car_type);
             formData.append('btw_city', data.btw_city);
-            formData.append('fk_user_id', userProfile.id);
-
+            formData.append('image', data.image);
             console.log('Car Data = ' + JSON.stringify(formData))
             const url = Constants.BASE_URL + 'api/add/car';
             const result = await APIUtils.postApiMultipart('post', url, formData)
@@ -233,10 +325,7 @@ export default function AddSawari({ props, navigation }) {
                 alert("Sorry user not register please try again!")
             } else {
                 if (result === 1) {
-                    alert("User Register Successfully")
-                    navigation.goBack();
-                } else if (result === 2) {
-                    alert("User Already Exist")
+                    alert("Car Added Successfully")
                     navigation.goBack();
                 }
             }
@@ -276,120 +365,134 @@ export default function AddSawari({ props, navigation }) {
                             />
                         </View>
                     }
-                    <View style={style.outerTextViewNoBg}>
-                        <View style={style.innerTextView}>
-                            <Text style={style.textStyleTitle}>Car Make</Text>
-                            <Picker data={carMake} title={placeholder} onValueChange={(value) => setData({ ...data, make: value, name: value })} />
-                        </View>
-                        <View style={style.innerTextView}>
-                            <Text style={style.textStyleTitle}>Car Model</Text>
-                            <Picker data={carModel} title={placeholder} onValueChange={(value) => setData({ ...data, model: value })} />
-                        </View>
-                    </View>
-                    <View style={style.outerTextView}>
-                        <View style={style.innerTextView}>
-                            <Text style={style.textStyleTitle}>Car Year</Text>
-                            <Picker data={services} title={placeholder} onValueChange={(value) => setData({ ...data, model_year: value })} />
-                        </View>
-                        <View style={style.innerTextView}>
-                            <Text style={style.textStyleTitle}>Car Assembly</Text>
-                            <Picker data={car_assembly} title={placeholder} onValueChange={(value) => setData({ ...data, assembly: value })} />
-                        </View>
-                    </View>
-                    <View style={style.outerTextViewNoBg}>
-                        <View style={style.innerTextView}>
-                            <Text style={style.textStyleTitle}>Car Varient</Text>
-                            <Mytextinput
-                                placeholder="Enter Value"
-                                onChangeText={(value) => setData({ ...data, variant: value })}
-                                style={{ padding: 10 }}
-                            />
-                        </View>
-                        <View style={style.innerTextView}>
-                            <Text style={style.textStyleTitle}>Car Transmission</Text>
-                            <Picker data={car_tranmission_list} title={placeholder} onValueChange={(value) => setData({ ...data, car_tranmission: value })} />
-                        </View>
-                    </View>
-                    <View style={style.outerTextView}>
-                        <View style={style.innerTextView}>
-                            <Text style={style.textStyleTitle}>Car Type</Text>
-                            <Picker data={services} title={placeholder} onValueChange={(value) => setData({ ...data, car_type: value })} />
-                        </View>
-                        <View style={style.innerTextView}>
-                            <Text style={style.textStyleTitle}>Engine Type</Text>
-                            <Picker data={car_engin_type} title={placeholder} onValueChange={(value) => setData({ ...data, engine_type: value })} />
-                        </View>
-                    </View>
-                    <View style={style.outerTextViewNoBg}>
-                        <View style={style.innerTextView}>
-                            <Text style={style.textStyleTitle}>Engine Capacity</Text>
-                            <Mytextinput
-                                placeholder="Enter Value"
-                                onChangeText={(value) => setData({ ...data, engine_capacity: value })}
-                                style={{ padding: 10 }}
-                                keyboardType="numeric"
-                            />
-                        </View>
-                        <View style={style.innerTextView}>
-                            <Text style={style.textStyleTitle}>Seating Capacity</Text>
-                            <Mytextinput
-                                placeholder="Enter Value"
-                                onChangeText={(value) => setData({ ...data, sitting_capacity: value })}
-                                style={{ padding: 10 }}
-                                keyboardType="numeric"
-                            />
-                        </View>
-                    </View>
-                    <View style={style.outerTextView}>
-                        <View style={style.innerTextView}>
-                            <Text style={style.textStyleTitle}>Body Color</Text>
-                            <Mytextinput
-                                placeholder="Enter Value"
-                                onChangeText={(value) => setData({ ...data, color: value })}
-                                style={{ padding: 10 }}
-                            />
-                        </View>
-                        <View style={style.innerTextView}>
-                            <Text style={style.textStyleTitle}>Registration City</Text>
-                            <Mytextinput
-                                placeholder="Enter Value"
-                                onChangeText={(value) => setData({ ...data, registration_city: value })}
-                                style={{ padding: 10 }}
-                            />
-                        </View>
-                    </View>
-                    <View style={style.outerTextViewNoBg}>
-                        <View style={style.innerTextView}>
-                            <Text style={style.textStyleTitle}>Pickup City</Text>
-                            <Mytextinput
-                                placeholder="Enter Value"
-                                onChangeText={(value) => setData({ ...data, pickup_city: value })}
-                                style={{ padding: 10 }}
-                            />
-                        </View>
-                        <View style={style.innerTextView}>
-                            <Text style={style.textStyleTitle}>Driver Availability</Text>
-                            <Picker data={driver_availability_list} title={placeholder} onValueChange={(value) => setData({ ...data, driver_availability: value })} />
-                        </View>
-                    </View>
-                    <View style={style.outerTextView}>
-                        <View style={style.innerTextView}>
-                            <Text style={style.textStyleTitle}>Car Mileage</Text>
-                            <TextInput keyboardType="numeric" placeholder="Car mileage in km's" onChangeText={(value) => setData({ ...data, car_mileage: value })} />
-                        </View>
-                        <View style={style.innerTextView}>
-                            <Text style={style.textStyleTitle}>Car Rent (Rs)</Text>
-                            <TextInput keyboardType="numeric" placeholder="Car Rent(Rs)" onChangeText={(value) => setData({ ...data, car_rent: value })} />
-                        </View>
-                    </View>
-                    <View>
-                        <Text style={{
-                            fontFamily: Constants.Fonts.FAMILY,
-                            fontSize: 17, marginStart: 20, marginTop: 10
-                        }}>Description (Optional)</Text>
-                        <TextInput style={style.addDescription} multiline placeholder="Enter Here" color={Constants.Colors.BLACK}
-                            placeholderTextColor={Constants.Colors.GREY} onChangeText={(value) => setData({ ...data, description: value })} />
-                    </View>
+                    {apiLoader ? <ActivityIndicator size='large' color={Constants.Colors.PRIMARY}></ActivityIndicator>
+                        : (<>
+                            <View>
+                                <View style={style.outerTextViewNoBg}>
+                                    <View style={style.innerTextView}>
+                                        <Text style={style.textStyleTitle}>Car Make</Text>
+                                        <Picker data={sawariMakes} title={placeholder} onValueChange={(value) => getModels(value)} />
+                                    </View>
+                                    <View style={style.innerTextView}>
+                                        <Text style={style.textStyleTitle}>Car Model</Text>
+                                        {modelLoader ? <Mytextinput editable={false} placeholder="Please..." color={Constants.Colors.LIGHT_GREY}></Mytextinput> :
+                                            <Picker data={sawariModels} title={placeholder} onValueChange={(value) => setData({ ...data, model: value })} />
+
+                                        }
+                                    </View>
+                                </View>
+                                <View style={style.outerTextView}>
+                                    <View style={style.innerTextView}>
+                                        <Text style={style.textStyleTitle}>Car Year</Text>
+                                        <Picker data={modelYears} title={placeholder} onValueChange={(value) => setData({ ...data, model_year: value })} />
+                                    </View>
+                                    <View style={style.innerTextView}>
+                                        <Text style={style.textStyleTitle}>Car Assembly</Text>
+                                        <Picker data={car_assembly} title={placeholder} onValueChange={(value) => setData({ ...data, assembly: value })} />
+                                    </View>
+                                </View>
+                                <View style={style.outerTextViewNoBg}>
+                                    <View style={style.innerTextView}>
+                                        <Text style={style.textStyleTitle}>Car Varient</Text>
+                                        <Mytextinput
+                                            placeholder="Enter Value"
+                                            onChangeText={(value) => setData({ ...data, variant: value })}
+                                            style={{ padding: 10 }}
+                                            color={Constants.Colors.WHITE}
+                                        />
+                                    </View>
+                                    <View style={style.innerTextView}>
+                                        <Text style={style.textStyleTitle}>Car Transmission</Text>
+                                        <Picker data={car_tranmission_list} title={placeholder} onValueChange={(value) => setData({ ...data, car_tranmission: value })} />
+                                    </View>
+                                </View>
+                                <View style={style.outerTextView}>
+                                    <View style={style.innerTextView}>
+                                        <Text style={style.textStyleTitle}>Car Type</Text>
+                                        <Picker data={carTypes} title={placeholder} onValueChange={(value) => setData({ ...data, car_type: value })} />
+                                    </View>
+                                    <View style={style.innerTextView}>
+                                        <Text style={style.textStyleTitle}>Engine Type</Text>
+                                        <Picker data={car_engin_type} title={placeholder} onValueChange={(value) => setData({ ...data, engine_type: value })} />
+                                    </View>
+                                </View>
+                                <View style={style.outerTextViewNoBg}>
+                                    <View style={style.innerTextView}>
+                                        <Text style={style.textStyleTitle}>Engine Capacity</Text>
+                                        <Mytextinput
+                                            placeholder="Enter Value"
+                                            onChangeText={(value) => setData({ ...data, engine_capacity: value })}
+                                            style={{ padding: 10 }}
+                                            keyboardType="numeric"
+                                            color={Constants.Colors.WHITE}
+                                        />
+                                    </View>
+                                    <View style={style.innerTextView}>
+                                        <Text style={style.textStyleTitle}>Seating Capacity</Text>
+                                        <Mytextinput
+                                            placeholder="Enter Value"
+                                            onChangeText={(value) => setData({ ...data, sitting_capacity: value })}
+                                            style={{ padding: 10 }}
+                                            keyboardType="numeric"
+                                            color={Constants.Colors.WHITE}
+                                        />
+                                    </View>
+                                </View>
+                                <View style={style.outerTextView}>
+                                    <View style={style.innerTextView}>
+                                        <Text style={style.textStyleTitle}>Body Color</Text>
+                                        <Mytextinput
+                                            placeholder="Enter Value"
+                                            onChangeText={(value) => setData({ ...data, color: value })}
+                                            style={{ padding: 10 }}
+                                            color={Constants.Colors.WHITE}
+                                        />
+                                    </View>
+                                    <View style={style.innerTextView}>
+                                        <Text style={style.textStyleTitle}>Registration City</Text>
+                                        <Mytextinput
+                                            placeholder="Enter Value"
+                                            onChangeText={(value) => setData({ ...data, registration_city: value })}
+                                            style={{ padding: 10 }}
+                                            color={Constants.Colors.WHITE}
+                                        />
+                                    </View>
+                                </View>
+                                <View style={style.outerTextViewNoBg}>
+                                    <View style={style.innerTextView}>
+                                        <Text style={style.textStyleTitle}>Pickup City</Text>
+                                        <Mytextinput
+                                            placeholder="Enter Value"
+                                            onChangeText={(value) => setData({ ...data, pickup_city: value })}
+                                            style={{ padding: 10 }}
+                                            color={Constants.Colors.WHITE}
+                                        />
+                                    </View>
+                                    <View style={style.innerTextView}>
+                                        <Text style={style.textStyleTitle}>Driver Availability</Text>
+                                        <Picker data={driver_availability_list} title={placeholder} onValueChange={(value) => setData({ ...data, driver_availability: value })} />
+                                    </View>
+                                </View>
+                                <View style={style.outerTextView}>
+                                    <View style={style.innerTextView}>
+                                        <Text style={style.textStyleTitle}>Car Mileage</Text>
+                                        <TextInput keyboardType="numeric" placeholder="Car mileage in km's" onChangeText={(value) => setData({ ...data, car_mileage: value })} />
+                                    </View>
+                                    <View style={style.innerTextView}>
+                                        <Text style={style.textStyleTitle}>Car Rent (Rs)</Text>
+                                        <TextInput keyboardType="numeric" placeholder="Car Rent(Rs)" onChangeText={(value) => setData({ ...data, car_rent: value })} />
+                                    </View>
+                                </View>
+                                <View>
+                                    <Text style={{
+                                        fontFamily: Constants.Fonts.FAMILY,
+                                        fontSize: 17, marginStart: 20, marginTop: 10
+                                    }}>Description (Optional)</Text>
+                                    <TextInput style={style.addDescription} multiline placeholder="Enter Here" color={Constants.Colors.BLACK}
+                                        placeholderTextColor={Constants.Colors.GREY} onChangeText={(value) => setData({ ...data, description: value })} />
+                                </View>
+                            </View>
+                        </>)}
                 </ScrollView>
                 <View style={{ marginTop: 24 }}>
                     {
@@ -400,6 +503,7 @@ export default function AddSawari({ props, navigation }) {
                             null
                     }
                 </View>
+
             </SafeAreaView>
             <SimpleCard style={{ alignSelf: 'center', width: '40%', marginBottom: 20 }} title="Submit" customClick={rentMyCar} gone={isDisable} />
         </>
