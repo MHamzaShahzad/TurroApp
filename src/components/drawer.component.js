@@ -59,7 +59,7 @@ export default function DrawerContent({ props, navigation }) {
       }
       <View style={styles.navItemContainer}>
         <Image source={globe} style={styles.navItemIconStyle} resizeMode='contain' />
-        <TouchableOpacity onPress={() => drawerNavigationItemClick(Constants.NavigationItems.ChooseItemScreen)}>
+        <TouchableOpacity onPress={() => drawerNavigationItemClick(Constants.NavigationItems.FilteredItemScreen)}>
           <Text style={styles.navItemTextStyle}>Visit Website</Text>
         </TouchableOpacity>
       </View>

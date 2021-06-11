@@ -1,6 +1,6 @@
 export default {
 
-    BASE_URL: "http://d907425459a4.ngrok.io/",///Replace with live url before production  
+    BASE_URL: "http://87160f1ed679.ngrok.io/",///Replace with live url before production  
 
     USER_DATA: 'userData',
     Colors: {
@@ -23,7 +23,7 @@ export default {
         AddSawariScreen: "AddSawariScreen",
         FilterSawariScreen: "FilterSawariScreen",
         ProfileScreen: "ProfileScreen",
-        ChooseItemScreen: "ChooseItemScreen",
+        FilteredItemScreen: "FilteredItemScreen",
         AdvanceFilterScreen: "AdvanceFilterScreen",
         AuthScreen: "AuthScreen",
         DrawerBottomTabs: "DrawerBottomTabs",

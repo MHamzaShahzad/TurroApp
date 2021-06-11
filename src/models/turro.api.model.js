@@ -50,11 +50,24 @@ const getUsers = async (user_id = 0) => {
         });
 }
 
-const getSawaris = async (car_id = 0) => {
-    const params = (car_id != 0) ? "?id="+car_id : ""
+const getSawaris = async (car_id = null, user_id = null) => {
+    let params = (car_id != null) ? "?id="+car_id : ""
+    params += (user_id != null) ? "?fk_user_id="+user_id : ""
     return await APIUtils.getApi(`${Constants.BASE_URL}api/car_list${params}`)
         .then(data => {
             console.log("success called with data " + data)
+            return Promise.resolve(data)
+
+        }).catch(error => {
+            console.log("error called: " + error);
+            return Promise.reject(error)
+        });
+}
+
+const getYears = async () => {
+    return await APIUtils.getApi(Constants.BASE_URL + "api/model_year")
+        .then(data => {
+            console.log("success called with data " + JSON.stringify(data))
             return Promise.resolve(data)
 
         }).catch(error => {
@@ -68,5 +81,6 @@ export default {
     getModels,
     getCarTypes,
     getUsers,
-    getSawaris
+    getSawaris,
+    getYears
 }

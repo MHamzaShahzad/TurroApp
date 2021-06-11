@@ -11,13 +11,11 @@ import NumberLoginScreen from './number_login.screen'
 import RegisterScreen from './register.screen'
 import OTPScreen from './otp.screen'
 import ProfileScreen from './profile.screen'
-import ChooseItem from './choose.screen'
+import FilteredItemScreen from './filtered.screen'
 import AdvanceFilterScreen from './advance_filter.screen'
 import BookSawariScreen from './book.screen'
 import ResetPasswordScreen from './resetpassword.screen'
 import ForgetPasswordScreen from './forgetpassword.screen'
-
-
 
 export default {
     AuthScreen,
@@ -33,7 +31,7 @@ export default {
     RegisterScreen,
     OTPScreen,
     ProfileScreen,
-    ChooseItem,
+    FilteredItemScreen,
     AdvanceFilterScreen,
     BookSawariScreen,
     ResetPasswordScreen,

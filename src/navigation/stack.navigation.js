@@ -32,7 +32,7 @@ function MainStackNavigator() {
                 <Stack.Screen name={Constants.NavigationItems.AddSawariScreen} component={Screens.SawariAddScreen} options={{ title: "Add Sawari" }} />
                 <Stack.Screen name={Constants.NavigationItems.FilterSawariScreen} component={Screens.SawariFilterScreen} options={{ title: "Search Sawari" }} />
                 <Stack.Screen name={Constants.NavigationItems.ProfileScreen} component={Screens.ProfileScreen} options={{ title: "Sawari Profile" }} />
-                <Stack.Screen name={Constants.NavigationItems.ChooseItemScreen} component={Screens.ChooseItem} options={{ title: "Choose Item" }} />
+                <Stack.Screen name={Constants.NavigationItems.FilteredItemScreen} component={Screens.FilteredItemScreen} options={{ title: "Filtered Sawari List" }} />
                 <Stack.Screen name={Constants.NavigationItems.AdvanceFilterScreen} component={Screens.AdvanceFilterScreen} options={{ title: "Advacne Filter" }} />
                 <Stack.Screen name={Constants.NavigationItems.BookSawariScreen} component={Screens.BookSawariScreen} options={{ title: "Book Sawari" }} />
                 <Stack.Screen name={Constants.NavigationItems.ResetPasswordScreen} component={Screens.ResetPasswordScreen} options={{ title: "Reset Password" }} />
