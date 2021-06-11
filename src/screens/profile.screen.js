@@ -279,14 +279,14 @@ export default function Profile({ props, navigation }) {
             </View>
             <ScrollView style={{ marginTop: 30 }}>
                 <View style={styles.inputFiledLayout}>
-                    <FontAwesomeIcons name={'user-o'} color={Constants.Colors.PRIMARY} size={22} style={styles.iconStyle} />
+                    <FontAwesomeIcons name={'user-o'} color={Constants.Colors.PRIMARY} size={22} />
                     <View style={{ flexDirection: 'column' }}>
                         <TextInput onChangeText={(val) => NameTextChange(val)} style={styles.inputFieldText} value={userProfile?.name} placeholder=" Enter Name " />
                         {validation.isValidName ? null : <Text style={{ color: '#FF0000', marginStart: 24 }}>You can't empty your name</Text>}
                     </View>
                 </View>
                 <View style={styles.inputFiledLayout}>
-                    <FontistoIcons name={'email'} color={Constants.Colors.PRIMARY} size={22} style={styles.iconStyle} />
+                    <FontistoIcons name={'email'} color={Constants.Colors.PRIMARY} size={22} />
                     <View style={{ flexDirection: 'column' }}>
                         <TextInput onChangeText={(val) => EmailTextChange(val)} style={styles.inputFieldText} value={userProfile?.email} placeholder=" Enter E-mail " />
                         {validation.isValidEmail ? null : <Text style={{ color: '#FF0000', marginStart: 24 }}>You can't empty your email</Text>}
@@ -294,14 +294,14 @@ export default function Profile({ props, navigation }) {
                     </View>
                 </View>
                 <View style={styles.inputFiledLayout}>
-                    <FontAwesomeIcons name={'mobile'} color={Constants.Colors.PRIMARY} size={22} style={styles.iconStyle} />
+                    <AntDesignIcons name={'mobile1'} color={Constants.Colors.PRIMARY} size={22} />
                     <View style={{ flexDirection: 'column' }}>
                         <TextInput onChangeText={(val) => PhoneTextChange(val)} keyboardType="numeric" style={[styles.inputFieldText]} value={"" + userProfile?.contact} placeholder=" Enter Phone Number " />
                         {validation.isValidPhone ? null : <Text style={{ color: '#FF0000', marginStart: 24 }}>You can't empty your phone</Text>}
                     </View>
                 </View>
                 <View style={styles.inputFiledLayout}>
-                    <AntDesignIcons name={'idcard'} color={Constants.Colors.PRIMARY} size={22} style={styles.iconStyle} />
+                    <AntDesignIcons name={'idcard'} color={Constants.Colors.PRIMARY} size={22} />
                     <TextInput keyboardType="numeric"
                         style={styles.inputFieldText}
                         value={"" + userProfile?.cnic}
@@ -310,7 +310,7 @@ export default function Profile({ props, navigation }) {
                     />
                 </View>
                 <View style={styles.inputFiledLayout}>
-                    <MaterialCommunityIcons name={'home-city-outline'} color={Constants.Colors.PRIMARY} size={22} style={styles.iconStyle} />
+                    <MaterialCommunityIcons name={'home-city-outline'} color={Constants.Colors.PRIMARY} size={22}/>
                     <TextInput style={styles.inputFieldText}
                         value={userProfile?.city_name}
                         placeholder=" Enter City Name "
@@ -318,7 +318,7 @@ export default function Profile({ props, navigation }) {
                     />
                 </View>
                 <View style={styles.inputFiledLayout}>
-                    <AntDesignIcons name={'home'} color={Constants.Colors.PRIMARY} style={styles.nameimg} size={22} style={styles.iconStyle} />
+                    <AntDesignIcons name={'home'} color={Constants.Colors.PRIMARY} style={styles.nameimg} size={22} />
                     <TextInput onChangeText={(val) => AddressTextChange(val)} style={styles.inputFieldText} value={userProfile?.address} placeholder=" Enter Address " />
                 </View>
                 <View style={{ width: 200, marginTop: 8 }}>
@@ -334,7 +334,6 @@ export default function Profile({ props, navigation }) {
                             :
                             null
                     }
-
                 </View>
                 <SimpleCard style={{ alignSelf: 'center', width: '90%', marginTop: 20 }} title="Update Profile" customClick={() => updateProfile()} gone={isDisable} />
             </ScrollView>
@@ -376,7 +375,8 @@ const styles = StyleSheet.create({
         padding: 20,
         flexDirection: "row",
         paddingLeft: 20,
-        borderColor: "#808080"
+        borderColor: "#808080",
+        alignItems: 'center'
     },
 
     editprofile: {
@@ -392,7 +392,5 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         color: "white",
     },
-    iconStyle: {
-        marginTop: 14
-    }
+
 });
