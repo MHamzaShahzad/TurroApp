@@ -61,7 +61,7 @@ export default function HomeScreen({ props, navigation }) {
                         numColumns={2}
                     /> */}
                     {
-                        isLoading == true ? (<ActivityIndicator />) : (
+                        isLoading == true ? (<ActivityIndicator size='large' color={Constants.Colors.PRIMARY}/>) : (
                             <>
                                 {
                                     sawarCategoryWiseList.map((list, index) =>

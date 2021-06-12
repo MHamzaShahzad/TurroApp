@@ -7,6 +7,7 @@ export default {
         PRIMARY: '#fa9b17',
         WHITE: '#ffffff',
         GREY: '#cacaca',
+        LIGHT_GREY: '#DDDDDD',
         BLACK: '#000'
     },
     Fonts: {
@@ -30,6 +31,6 @@ export default {
         MySawariListScreen: "MySawariListScreen",
         BookSawariScreen: "BookSawariScreen",
         ResetPasswordScreen: "ResetPasswordScreen",
-        ForgetPasswordScreen:"ForgetPasswordScreen"
+        ForgetPasswordScreen: "ForgetPasswordScreen"
     }
 }

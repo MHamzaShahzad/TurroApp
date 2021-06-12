@@ -147,7 +147,7 @@ export default function FilterSawari({ props, navigation }) {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Constants.Colors.WHITE }}>
             <View style={style.container}>
-                {isLoading ? <ActivityIndicator /> :
+                {isLoading ? <ActivityIndicator size='large' color={Constants.Colors.PRIMARY} /> :
                     (<>
                         <Text style={style.textStyleHeading}>Car Make</Text>
                         <DropDownPicker data={sawariMakes} title={placeholder1} onValueChange={(value) => getModels(value)} />
@@ -160,15 +160,16 @@ export default function FilterSawari({ props, navigation }) {
                             placeholder={placeholder3}
                             onChangeText={(value) => setData({ ...data, city: value })}
                             style={{ padding: 10 }}
+                            color={Constants.Colors.WHITE}
                         />
                         <View style={style.outerTextViewNoBg}>
                             <View style={style.innerTextView}>
                                 <Text style={style.textStyleHeading}>Min Rent (Rs)</Text>
-                                <TextInput keyboardType="numeric" placeholder="Min Rent (Rs)" onChangeText={(value) => setData({ ...data, min_car_rent: value })} />
+                                <TextInput color={Constants.Colors.WHITE} keyboardType="numeric" placeholder="Min Rent (Rs)" onChangeText={(value) => setData({ ...data, min_car_rent: value })} />
                             </View>
                             <View style={style.innerTextView}>
                                 <Text style={style.textStyleHeading}>Max Rent (Rs)</Text>
-                                <TextInput keyboardType="numeric" placeholder="Max Rent (Rs)" onChangeText={(value) => setData({ ...data, max_car_rent: value })} />
+                                <TextInput color={Constants.Colors.WHITE} keyboardType="numeric" placeholder="Max Rent (Rs)" onChangeText={(value) => setData({ ...data, max_car_rent: value })} />
                             </View>
                         </View>
                         <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 16 }}>
