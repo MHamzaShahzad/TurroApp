@@ -1,4 +1,4 @@
-import {Linking, Platform} from 'react-native'
+import {Linking, Platform, Alert} from 'react-native'
 
 const openSMSApp = (phoneNumber, message) => {
     const separator = Platform.OS === 'ios' ? '&' : '?' 

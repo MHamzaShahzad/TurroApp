@@ -13,8 +13,9 @@ const getMakes = async () => {
         });
 }
 
-const getModels = async (make_id) => {
-    return await APIUtils.getApi(`${Constants.BASE_URL}api/models?fk_make_id=${make_id}`)
+const getModels = async (make_id = null) => {
+    const params = (make_id) ? "?fk_make_id="+make_id : "?all"
+    return await APIUtils.getApi(`${Constants.BASE_URL}api/models${params}`)
         .then(data => {
             console.log("success called with data " + data)
             return Promise.resolve(data)

@@ -1,13 +1,16 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Image } from 'react-native';
 import Constants from '../../utils/constants'
+import AppContext from '../context.component';
+import PlaceHolderIcon from '../../assets/placeholder.png'
 
 const HomeCard = (props) => {
+    const appContext = React.useContext(AppContext);
     return (
         <TouchableOpacity style={[styles.layout, { width: props.style?.width, height: props.style?.height }]} onPress={props.customClick}>
-            <Image style={styles.image} source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWOtpaoxvucsi4fj6-NBd08-FKGm_yJKrnctIOuMBh-BgWELKGnBcIEaaXF1OPnTZdXWM&usqp=CAU" }} resizeMode={'cover'} />
+            <Image style={styles.image} source={{ uri: "https://www.leaselink.co.nz/themes/sl-bootstrap/dist/images/nophoto.png" }} resizeMode={'cover'} />
             <View style={styles.textView}>
-                <Text style={styles.text}>{props.item?.make ?? props.item?.name} {props.item?.model}</Text>
+                <Text style={styles.text}>{appContext.makes.find((make) => (make.id == props.item?.fk_make_id))?.name} {appContext.models.find((model) => (model.id == props.item?.fk_model_id))?.model}</Text>
                 <Text style={[styles.text, { textAlign: 'right' }]}>{props.item?.variant}</Text>
             </View>
             <View style={styles.textView}>

@@ -11,6 +11,9 @@ import call from '../assets/call.png';
 import Constants from '../utils/constants';
 import UserCache from '../utils/cache.utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { openCallDialer } from '../utils/common.utils'
+import { openInbox, openComposer } from "react-native-email-link";
+
 var u_data;
 export default function DrawerContent({ props, navigation }) {
 
@@ -57,32 +60,27 @@ export default function DrawerContent({ props, navigation }) {
           </TouchableOpacity>
         </View>
       }
-      <View style={styles.navItemContainer}>
-        <Image source={globe} style={styles.navItemIconStyle} resizeMode='contain' />
-        <TouchableOpacity onPress={() => drawerNavigationItemClick(Constants.NavigationItems.FilteredItemScreen)}>
-          <Text style={styles.navItemTextStyle}>Visit Website</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.navItemContainer}>
-        <Image source={FaQ} style={styles.navItemIconStyle} resizeMode='contain' />
-        <TouchableOpacity>
-          <Text style={styles.navItemTextStyle}>FAQ</Text>
-        </TouchableOpacity>
-      </View>
 
       <View style={styles.navItemContainer}>
         <Image source={feedback} style={styles.navItemIconStyle} resizeMode='contain' />
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() =>
+          openComposer({
+            to: "support@example.com",
+            subject: "I have a question",
+            body: "Hi, can you help me with...",
+          })
+        }>
           <Text style={styles.navItemTextStyle}>Feedback</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.navItemContainer}>
         <Image source={call} style={styles.navItemIconStyle} resizeMode='contain' />
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => openCallDialer("03001234567")}>
           <Text style={styles.navItemTextStyle}>Call Us</Text>
         </TouchableOpacity>
       </View>
+
     </View>
   );
 }

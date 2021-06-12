@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, FlatList, Text, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, FlatList, Text, SafeAreaView, ScrollView, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import HomeCard from '../components/cards/home.card.component';
@@ -12,17 +12,22 @@ export default function MySawariListScreen({ props, navigation }) {
 
     const [isLoading, setLoading] = useState(true);
     const [sawariList, setSawariList] = useState([]);
-    const [userProfile, setUserProfile] = useState({});
+    const [userProfile, setUserProfile] = useState(null)
 
     const getUserData = async () => {
         UserCache.UserData(Constants.USER_DATA)
             .then(data => {
                 console.log("defaultApp -> data", JSON.stringify(data))
-                setUserProfile(data);
-                getUserSawaris(data.id)
+                if (data != null) {
+                    setUserProfile(data);
+                    setLoading(true)
+                    getUserSawaris(data.id)
+                }
             })
-            .catch((error) => { 
-                console.error(error) 
+            .catch((error) => {
+                console.error(error)
+            })
+            .finally(() => {
                 setLoading(false)
             })
     }
@@ -52,15 +57,17 @@ export default function MySawariListScreen({ props, navigation }) {
         <>
             <Header headerComponent={addSawariComponent} />
             <SafeAreaView style={{ flex: 1, padding: 10 }}>
-                <FlatList
-                    data={sawariList}
-                    renderItem={({ item }) =>
-                        <View style={styles.GridViewBlockStyle}>
-                            <HomeCard style={{ height: 350, width: '100%' }} title="DATA" customClick={() => navigation.navigate(Constants.NavigationItems.SawariDetailsScreen)} />
-                        </View>
-                    }
-                    showsVerticalScrollIndicator={false}
-                />
+                {isLoading ? <ActivityIndicator /> :
+                    <FlatList
+                        data={sawariList}
+                        renderItem={({ item }) =>
+                            <View style={styles.GridViewBlockStyle}>
+                                <HomeCard style={{ height: 350, width: '100%' }} item={item} customClick={() => navigation.navigate(Constants.NavigationItems.SawariDetailsScreen, { sawari: item })} />
+                            </View>
+                        }
+                        showsVerticalScrollIndicator={false}
+                    />
+                }
             </SafeAreaView>
         </>
     );

@@ -1,6 +1,6 @@
 export default {
 
-    BASE_URL: "http://87160f1ed679.ngrok.io/",///Replace with live url before production  
+    BASE_URL: "http://turoo.witorbit.net/",///Replace with live url before production  
 
     USER_DATA: 'userData',
     Colors: {

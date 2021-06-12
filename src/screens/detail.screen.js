@@ -6,6 +6,7 @@ import {
     StyleSheet,
     SafeAreaView,
     TouchableOpacity,
+    ActivityIndicator
 } from 'react-native';
 
 import Styles from '../styles';
@@ -16,10 +17,38 @@ import Constants from '../utils/constants';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import APIUtils from '../utils/api.utils';
 import { openSMSApp, openCallDialer } from '../utils/common.utils'
+import UserCache from '../utils/cache.utils'
 
 export default function DescriptionScreen({ route, navigation }) {
     const { sawari } = route.params
+    const [isLoading, setLoading] = useState(false)
     const [renterProfile, setRenterProfile] = useState({});
+    const [userProfile, setUserProfile] = useState(null)
+
+    const getUserData = async () => {
+        await UserCache.UserData(Constants.USER_DATA)
+            .then(user => {
+                console.log("defaultApp -> data", JSON.stringify(user))
+                if (user != null) {
+                    setUserProfile(user);
+                }
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+            .finally(() => {
+                setLoading(false)
+            })
+    }
+
+    const getRenterData = async () => {
+        await APIUtils.getApi(Constants.BASE_URL + 'api/user_list?id=' + sawari.fk_user_id)
+            .then(data => {
+                console.log("defaultApp -> data", JSON.stringify(data))
+                setRenterProfile(data)
+            })
+            .catch((error) => console.error(error))
+    }
 
     const [data, setData] = useState([
         {
@@ -58,13 +87,11 @@ export default function DescriptionScreen({ route, navigation }) {
         },
     ]);
 
-    useEffect(() => {
-        APIUtils.getApi(Constants.BASE_URL + 'api/user_list?id=' + sawari.fk_user_id)
-            .then(data => {
-                console.log("defaultApp -> data", JSON.stringify(data))
-                setRenterProfile(data)
-            })
-            .catch((error) => console.error(error))
+    useEffect(async () => {
+        setLoading(true)
+        await getRenterData()
+        await getUserData()
+        setLoading(false)
     }, []);
 
     React.useLayoutEffect(() => {
@@ -220,7 +247,7 @@ export default function DescriptionScreen({ route, navigation }) {
                     </TouchableOpacity>
                 </View> */}
             </SafeAreaView>
-            <SimpleCard style={{ marginBottom: 20, width: '40%', alignSelf: 'center' }} title="Book Now" customClick={() => navigation.navigate(Constants.NavigationItems.BookSawariScreen, {sawari: sawari})} />
+            <SimpleCard style={{ marginBottom: 20, width: '40%', alignSelf: 'center' }} title="Book Now" customClick={() => userProfile != null ? navigation.navigate(Constants.NavigationItems.BookSawariScreen, {sawari: sawari}) : alert("Login to your account first.")} />
         </>
     )
 }
