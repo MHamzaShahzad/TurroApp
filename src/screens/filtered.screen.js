@@ -14,7 +14,7 @@ export default function FilteredItemScreen({ route, navigation }) {
     }, [])
 
     const Item = ({ item }) => (
-        <View style={styles.item}>
+        <View style={styles.item} onStartShouldSetResponder={() => navigation.navigate(Constants.NavigationItems.SawariDetailsScreen, { sawari: item })}>
             <Image style={styles.img} source={{ uri: "https://www.leaselink.co.nz/themes/sl-bootstrap/dist/images/nophoto.png" }} resizeMode={'cover'} />
             <View style={styles.viewcontainer}>
                 <View style={styles.textview}>

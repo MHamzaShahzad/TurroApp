@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
     ScrollView,
     Text,
@@ -18,12 +18,14 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import APIUtils from '../utils/api.utils';
 import { openSMSApp, openCallDialer } from '../utils/common.utils'
 import UserCache from '../utils/cache.utils'
+import AppContext from '../components/context.component'
 
 export default function DescriptionScreen({ route, navigation }) {
     const { sawari } = route.params
     const [isLoading, setLoading] = useState(false)
     const [renterProfile, setRenterProfile] = useState({});
     const [userProfile, setUserProfile] = useState(null)
+    const appContext = useContext(AppContext);
 
     const getUserData = async () => {
         await UserCache.UserData(Constants.USER_DATA)
@@ -123,7 +125,7 @@ export default function DescriptionScreen({ route, navigation }) {
                     <View style={{ padding: 10 }}>
                         <View style={style.outerTextViewNoBg}>
                             <View style={style.innerTextView}>
-                                <Text style={style.textStyleHeading}>{sawari.make ?? sawari.name} {sawari.model}</Text>
+                                <Text style={style.textStyleHeading}>{appContext.makes.find((make) => (make.id == sawari.fk_make_id))?.name} {appContext.models.find((model) => (model.id == sawari?.fk_model_id))?.model}</Text>
                             </View>
                             <View style={style.innerTextView}>
                                 <Text style={style.textStyleHeading}>{sawari.car_rent}</Text>
