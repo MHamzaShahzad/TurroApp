@@ -77,7 +77,7 @@ export default function HomeScreen({ props, navigation }) {
                                                     }[list[0].assembly]
                                                 }</Text>
                                                 <View style={{ flex: 0.5, alignItems: 'flex-end' }}>
-                                                    <Text onPress={() => viewAll(list)}>View All</Text>
+                                                    <Text onPress={() => viewAll(list)}>More</Text>
                                                 </View>
                                             </View>
                                             <FlatList
@@ -88,7 +88,7 @@ export default function HomeScreen({ props, navigation }) {
                                                 keyExtractor={({ id }, index) => index.toString()}
                                                 renderItem={({ item }) =>
                                                     <View style={styles.GridViewBlockStyle} key={item.id}>
-                                                        <HomeCard style={{ height: 200, width: 150 }} item={item} customClick={() => viewDetails(item)} />
+                                                        <HomeCard style={{ height: 200, width: 250 }} item={item} customClick={() => viewDetails(item)} />
                                                     </View>
                                                 }
                                             />

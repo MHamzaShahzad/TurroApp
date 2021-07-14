@@ -18,11 +18,11 @@ export default function FilteredItemScreen({ route, navigation }) {
             <Image style={styles.img} source={{ uri: "https://www.leaselink.co.nz/themes/sl-bootstrap/dist/images/nophoto.png" }} resizeMode={'cover'} />
             <View style={styles.viewcontainer}>
                 <View style={styles.textview}>
-                    <Text style={styles.text}>{appContext.makes.find((make) => (make.id == item.fk_make_id))?.name}</Text>
-                    <Text style={styles.text}>{appContext.models.find((model) => (model.id == item.fk_model_id))?.model}</Text>
-                    <Text style={styles.text}>{item.pickup_city}</Text>
-                    <View style={styles.Rentview}>
-                        <Text style={styles.text}>{item.car_rent}</Text>
+                    <Text style={styles.text}>{appContext.makes.find((make) => (make.id == item.fk_make_id))?.name} {appContext.models.find((model) => (model.id == item.fk_model_id))?.model}, {item?.model_year}</Text>
+                    <Text style={styles.textDescription}>{item?.description}</Text>
+                    <View style={styles.viewcontainer}>
+                        <Text style={styles.text, {flex: 0.5, color: Constants.Colors.PRIMARY, fontFamily: Constants.Fonts.FAMILY, fontWeight: 'bold'}}>{item.pickup_city}</Text>
+                        <Text style={styles.text, {flex: 0.5, textAlign: 'right', color: Constants.Colors.GREY, fontFamily: Constants.Fonts.FAMILY, fontStyle: 'italic', fontWeight: 'bold'}}>{item.car_rent}</Text>
                     </View>
                 </View>
             </View>
@@ -59,18 +59,21 @@ const styles = StyleSheet.create({
         elevation: 5,
         backgroundColor: "white"
     },
+    textDescription: {
+        padding: 5,
+        color: Constants.Colors.GREY,
+        fontFamily: Constants.Fonts.FAMILY,
+    },
     text: {
         color: Constants.Colors.PRIMARY,
         fontFamily: Constants.Fonts.FAMILY,
-        fontSize: 16
+        fontSize: 16,
+        fontWeight: 'bold'
     },
     img: {
         width: "30%",
         height: 100,
         borderRadius: 10
-    },
-    Rentview: {
-        alignItems: "flex-end"
     },
 });
 

@@ -28,7 +28,7 @@ export default function FilterSawari({ props, navigation }) {
         registration_city: null,
         pickup_city: null,
         car_mileage: null,
-        min_car_rent: null,
+        min_car_rent: 0,
         max_car_rent: null,
         driver_availability: null,
         btw_city: null,
@@ -118,7 +118,7 @@ export default function FilterSawari({ props, navigation }) {
             formData.append('pickup_city', data.pickup_city);
         if (data.car_mileage)
             formData.append('car_mileage', data.car_mileage);
-        if (data.min_car_rent)
+        if (data.min_car_rent != null)
             formData.append('min_car_rent', data.min_car_rent);
         if (data.max_car_rent)
             formData.append('max_car_rent', data.max_car_rent);
